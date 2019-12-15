@@ -15,9 +15,6 @@
  */
 package es.blackleg.jlibnotify;
 
-import es.blackleg.jlibnotify.DefaultLibNotifyLoader;
-import es.blackleg.jlibnotify.DefaultLibNotify;
-import es.blackleg.jlibnotify.LibNotifyLoader;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 

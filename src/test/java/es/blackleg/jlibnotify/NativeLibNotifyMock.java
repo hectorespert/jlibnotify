@@ -72,5 +72,10 @@ public class NativeLibNotifyMock implements NativeLibNotify {
     public GBoolean notify_get_server_info(String[] ret_name, String[] ret_vendor, String[] ret_version, String[] ret_spec_version) {
         return GBoolean.TRUE;
     }
+
+    @Override
+    public Pointer notify_get_server_caps() {
+        return Pointer.NULL;
+    }
     
 }

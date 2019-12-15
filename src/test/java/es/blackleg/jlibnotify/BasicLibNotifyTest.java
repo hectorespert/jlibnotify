@@ -15,8 +15,6 @@
  */
 package es.blackleg.jlibnotify;
 
-import es.blackleg.jlibnotify.LibNotify;
-import es.blackleg.jlibnotify.DefaultLibNotify;
 import es.blackleg.jlibnotify.jna.NativeLibNotify;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +30,7 @@ public class BasicLibNotifyTest {
     @Before
     public void setUp() {
         NativeLibNotify nativeLibNotify = new NativeLibNotifyMock();
-        libNotify = new DefaultLibNotify(nativeLibNotify);
+        libNotify = new DefaultLibNotify(nativeLibNotify, null);
     }
 
     @Test
