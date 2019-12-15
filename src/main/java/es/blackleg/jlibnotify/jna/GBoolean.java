@@ -13,28 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.blackleg.jnotify;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.Before;
-import org.junit.Test;
+package es.blackleg.jlibnotify.jna;
 
 /**
  *
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
-public class BasicServerInfoTest {
-
-    private BasicServerInfo basicServerInfo;
-    
-    @Before
-    public void setUp() {
-        basicServerInfo = new BasicServerInfo("name", "vendor", "version", "specVersion");
-    }
-
-    @Test
-    public void testToString() {
-        assertThat(basicServerInfo.toString()).isNotEmpty();
-    }
-    
+public enum GBoolean {
+    FALSE,
+    TRUE
 }

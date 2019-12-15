@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.blackleg.jnotify.jna;
+package es.blackleg.jlibnotify;
 
 /**
  *
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
-public enum GBoolean {
-    FALSE,
-    TRUE
+public interface LibNotifyLoader {
+    
+    LibNotify load();
+
 }

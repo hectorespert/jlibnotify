@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Hector Espert <hectorespertpardo@gmail.com>.
+ * Copyright 2019 Hector Espert.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,29 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.blackleg.jnotify;
+package es.blackleg.jlibnotify;
 
-import es.blackleg.jnotify.jna.NativeLibNotify;
-import org.junit.Before;
-import org.junit.Test;
+import java.util.Collection;
 
 /**
  *
- * @author Hector Espert <hectorespertpardo@gmail.com>
+ * @author Hector Espert
  */
-public class BasicLibNotifyTest {
+public interface LibNotify {
     
-    private LibNotify libNotify;
+    void init(String appName);
     
-    @Before
-    public void setUp() {
-        NativeLibNotify nativeLibNotify = new NativeLibNotifyMock();
-        libNotify = new DefaultLibNotify(nativeLibNotify);
-    }
+    boolean isAvailable();
 
-    @Test
-    public void testInit() {
-        libNotify.init("test-init");
-    }
+    void unInit();
+    
+    String getAppName();
+    
+    void setAppName(String appName);
+    
+    ServerInfo getServerInfo();
+    
+    Collection<String> getServerCapabilities();
 
+    Notification createNotification(String summary, String body, String icon);
+
+    void showNotification(Notification notification);
+
+    void closeNotification(Notification notification);
+    
 }

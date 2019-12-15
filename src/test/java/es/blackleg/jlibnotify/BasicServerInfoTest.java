@@ -13,18 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.blackleg.jnotify.jna;
+package es.blackleg.jlibnotify;
 
-import com.sun.jna.Structure;
+import es.blackleg.jlibnotify.BasicServerInfo;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  *
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
-public class GError extends Structure {
+public class BasicServerInfoTest {
+
+    private BasicServerInfo basicServerInfo;
     
-    public int code;
-    
-    public String message;
+    @Before
+    public void setUp() {
+        basicServerInfo = new BasicServerInfo("name", "vendor", "version", "specVersion");
+    }
+
+    @Test
+    public void testToString() {
+        assertThat(basicServerInfo.toString()).isNotEmpty();
+    }
     
 }

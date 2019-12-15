@@ -13,14 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.blackleg.jnotify;
+package es.blackleg.jlibnotify;
+
+import es.blackleg.jlibnotify.LibNotify;
+import es.blackleg.jlibnotify.DefaultLibNotify;
+import es.blackleg.jlibnotify.jna.NativeLibNotify;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  *
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
-public interface LibNotifyLoader {
+public class BasicLibNotifyTest {
     
-    LibNotify load();
+    private LibNotify libNotify;
+    
+    @Before
+    public void setUp() {
+        NativeLibNotify nativeLibNotify = new NativeLibNotifyMock();
+        libNotify = new DefaultLibNotify(nativeLibNotify);
+    }
+
+    @Test
+    public void testInit() {
+        libNotify.init("test-init");
+    }
 
 }

@@ -13,16 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.blackleg.jnotify;
-
-import com.sun.jna.Pointer;
+package es.blackleg.jlibnotify;
 
 /**
  *
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
-public interface Notification {
+public interface ServerInfo {
+    
+    String getName();
 
-    Pointer getPointer();
+    String getVendor();
+
+    String getVersion();
+
+    String getSpecVersion();
     
 }
