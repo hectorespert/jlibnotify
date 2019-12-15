@@ -49,20 +49,20 @@ public class BasicLibNotify implements LibNotify {
     }
 
     @Override
-    public LibNotifyNotification createNotification(String summary, String body, String icon) {
+    public Notification createNotification(String summary, String body, String icon) {
         Pointer pointer = nativeLibNotify.notify_notification_new(summary, body, icon);
-        return new DefaultLibNotifyNotification(pointer, summary, body, icon);
+        return new BasicNotification(pointer, summary, body, icon);
     }
 
     @Override
-    public void showNotification(LibNotifyNotification notification) {
+    public void showNotification(Notification notification) {
         if (nativeLibNotify.notify_notification_show(notification.getPointer(), Pointer.NULL) == GBoolean.FALSE) {
             throw new RuntimeException("Error when show notification");
         }
     }
 
     @Override
-    public void closeNotification(LibNotifyNotification notification) {
+    public void closeNotification(Notification notification) {
         if (nativeLibNotify.notify_notification_close(notification.getPointer(), Pointer.NULL) == GBoolean.FALSE) {
             throw new RuntimeException("Error when show notification");
         }

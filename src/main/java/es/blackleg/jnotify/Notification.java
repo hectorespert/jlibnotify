@@ -15,31 +15,14 @@
  */
 package es.blackleg.jnotify;
 
+import com.sun.jna.Pointer;
+
 /**
  *
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
-public class TestMain {
+public interface Notification {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws InterruptedException {
-        
-        LibNotify libNotifyWrapper = DefaultLibNotifyLoader.getInstance().load();
-        
-        libNotifyWrapper.init("Test");
-        
-        LibNotifyNotification notification = libNotifyWrapper.createNotification("Summary", "Body", "dialog-information");
-        
-        libNotifyWrapper.showNotification(notification);
-        
-        Thread.sleep(1000);
-        
-        libNotifyWrapper.closeNotification(notification);
-        
-        
-        libNotifyWrapper.unInit();
-    }
+    Pointer getPointer();
     
 }

@@ -21,7 +21,7 @@ import com.sun.jna.Pointer;
  *
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
-public class DefaultLibNotifyNotification implements LibNotifyNotification {
+public class BasicNotification implements Notification {
     
     private final Pointer pointer;
     
@@ -31,7 +31,7 @@ public class DefaultLibNotifyNotification implements LibNotifyNotification {
     
     private final String icon;
 
-    public DefaultLibNotifyNotification(Pointer pointer, String title, String detailsText, String icon) {
+    public BasicNotification(Pointer pointer, String title, String detailsText, String icon) {
         this.pointer = pointer;
         this.title = title;
         this.detailsText = detailsText;

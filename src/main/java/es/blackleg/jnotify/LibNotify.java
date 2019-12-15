@@ -27,10 +27,10 @@ public interface LibNotify {
 
     public void unInit();
 
-    public LibNotifyNotification createNotification(String summary, String body, String icon);
+    public Notification createNotification(String summary, String body, String icon);
 
-    public void showNotification(LibNotifyNotification notification);
+    public void showNotification(Notification notification);
 
-    public void closeNotification(LibNotifyNotification notification);
+    public void closeNotification(Notification notification);
     
 }
