@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Hector Espert <hectorespertpardo@gmail.com>.
+ * Copyright 2019 Hector Espert.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,13 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.blackleg.java.libnotify.jna;
+package es.blackleg.jnotify;
 
 /**
  *
- * @author Hector Espert <hectorespertpardo@gmail.com>
+ * @author Hector Espert
  */
-public enum GBoolean {
-    FALSE,
-    TRUE
+public interface LibNotifyWrapper {
+    
+    public void init(String appName);
+    
+    public boolean isAvailable();
+
+    public void unInit();
+
+    public LibNotifyNotification createNotification(String summary, String body, String icon);
+
+    public void showNotification(LibNotifyNotification notification);
+
+    public void closeNotification(LibNotifyNotification notification);
+    
 }

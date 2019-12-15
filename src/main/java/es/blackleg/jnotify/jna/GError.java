@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Hector Espert.
+ * Copyright 2019 Hector Espert <hectorespertpardo@gmail.com>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,24 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.blackleg.java.libnotify;
+package es.blackleg.jnotify.jna;
+
+import com.sun.jna.Structure;
 
 /**
  *
- * @author Hector Espert
+ * @author Hector Espert <hectorespertpardo@gmail.com>
  */
-public interface LibNotifyWrapper {
+public class GError extends Structure {
     
-    public void init(String appName);
+    public int code;
     
-    public boolean isAvailable();
-
-    public void unInit();
-
-    public LibNotifyNotification createNotification(String summary, String body, String icon);
-
-    public void showNotification(LibNotifyNotification notification);
-
-    public void closeNotification(LibNotifyNotification notification);
+    public String message;
     
 }

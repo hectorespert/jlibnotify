@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>es.blackleg.java</groupId>
-    <artifactId>libnotify</artifactId>
+    <groupId>es.blackleg</groupId>
+    <artifactId>jnotify</artifactId>
     <version>0.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <properties>
@@ -11,8 +11,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     <name>${project.groupId}.${project.artifactId}</name>
-    <description>Java LibNotify wrapper</description>
-    <url>https://github.com/blackleg/jlibnotify</url>
+    <description>Java libnotify wrapper</description>
+    <url>https://github.com/blackleg/jnotify</url>
     <developers>
         <developer>
             <name>Hector Espert</name>
@@ -28,9 +28,9 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:git:git@github.com:blackleg/jlibnotify.git</connection>
-        <developerConnection>scm:git:git@github.com:blackleg/jlibnotify.git</developerConnection>
-        <url>https://github.com/blackleg/jlibnotify</url>
+        <connection>scm:git:git@github.com:blackleg/jnotify.git</connection>
+        <developerConnection>scm:git:git@github.com:blackleg/jnotify.git</developerConnection>
+        <url>https://github.com/blackleg/jnotify</url>
         <tag>HEAD</tag>
     </scm>
     <build>

@@ -13,18 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.blackleg.java.libnotify.jna;
-
-import com.sun.jna.Structure;
+package es.blackleg.jnotify.jna;
 
 /**
  *
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
-public class GError extends Structure {
-    
-    public int code;
-    
-    public String message;
-    
+public enum GBoolean {
+    FALSE,
+    TRUE
 }

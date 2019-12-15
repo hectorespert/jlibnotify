@@ -13,27 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.blackleg.java.libnotify.jna;
-
-import com.sun.jna.Library;
-import com.sun.jna.Pointer;
+package es.blackleg.jnotify;
 
 /**
  *
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
-public interface LibNotify extends Library {
-    
-    GBoolean notify_init(String appName);
-    
-    GBoolean notify_is_initted();
-    
-    void notify_uninit();
-    
-    Pointer notify_notification_new(String summary, String body, String icon);
-    
-    GBoolean notify_notification_show(Pointer notification, Pointer error);
-    
-    GBoolean notify_notification_close(Pointer notification, Pointer error);
+public class TestMain {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) throws InterruptedException {
+        LibNotifyWrapper libNotifyWrapper = new DefaultLibNotifyWrapper();
+        libNotifyWrapper.init("Test");
+        
+        LibNotifyNotification notification = libNotifyWrapper.createNotification("Summary", "Body", "dialog-information");
+        
+        libNotifyWrapper.showNotification(notification);
+        
+        Thread.sleep(1000);
+        
+        libNotifyWrapper.closeNotification(notification);
+        
+        
+        libNotifyWrapper.unInit();
+    }
     
 }
