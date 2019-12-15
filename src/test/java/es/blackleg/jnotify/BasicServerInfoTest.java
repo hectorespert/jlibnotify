@@ -15,7 +15,7 @@
  */
 package es.blackleg.jnotify;
 
-import es.blackleg.jnotify.jna.NativeLibNotify;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,19 +23,18 @@ import org.junit.Test;
  *
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
-public class BasicLibNotifyTest {
-    
-    private LibNotify libNotify;
+public class BasicServerInfoTest {
+
+    private BasicServerInfo basicServerInfo;
     
     @Before
     public void setUp() {
-        NativeLibNotify nativeLibNotify = new NativeLibNotifyMock();
-        libNotify = new DefaultLibNotify(nativeLibNotify);
+        basicServerInfo = new BasicServerInfo("name", "vendor", "version", "specVersion");
     }
 
     @Test
-    public void testInit() {
-        libNotify.init("test-init");
+    public void testToString() {
+        assertThat(basicServerInfo.toString()).isNotEmpty();
     }
-
+    
 }

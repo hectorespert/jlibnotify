@@ -18,16 +18,17 @@ package es.blackleg.jnotify;
 import com.sun.jna.Pointer;
 import es.blackleg.jnotify.jna.GBoolean;
 import es.blackleg.jnotify.jna.NativeLibNotify;
+import java.util.Collection;
 
 /**
  *
  * @author Hector Espert
  */
-public class BasicLibNotify implements LibNotify {
+public class DefaultLibNotify implements LibNotify {
 
     private final NativeLibNotify nativeLibNotify;
 
-    public BasicLibNotify(NativeLibNotify libNotify) {
+    public DefaultLibNotify(NativeLibNotify libNotify) {
         this.nativeLibNotify = libNotify;
     }
 
@@ -46,6 +47,35 @@ public class BasicLibNotify implements LibNotify {
     @Override
     public void unInit() {
         nativeLibNotify.notify_uninit();
+    }
+    
+    @Override
+    public String getAppName() {
+        return nativeLibNotify.notify_get_app_name();
+    }
+
+    @Override
+    public void setAppName(String appName) {
+        nativeLibNotify.notify_set_app_name(appName);
+    }
+    
+    @Override
+    public ServerInfo getServerInfo() {
+        String[] name = new String[1];
+        String[] vendor = new String[1];
+        String[] version = new String[1];
+        String[] specVersion = new String[1];
+        
+        if (nativeLibNotify.notify_get_server_info(name, vendor, version, specVersion)== GBoolean.FALSE) {
+            throw new RuntimeException("Error when get server info");
+        }
+        
+        return new BasicServerInfo(name[0], vendor[0], version[0], specVersion[0]);
+    }
+    
+    @Override
+    public Collection<String> getServerCapabilities() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override

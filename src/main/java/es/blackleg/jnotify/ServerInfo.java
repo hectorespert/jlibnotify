@@ -15,27 +15,18 @@
  */
 package es.blackleg.jnotify;
 
-import es.blackleg.jnotify.jna.NativeLibNotify;
-import org.junit.Before;
-import org.junit.Test;
-
 /**
  *
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
-public class BasicLibNotifyTest {
+public interface ServerInfo {
     
-    private LibNotify libNotify;
+    String getName();
+
+    String getVendor();
+
+    String getVersion();
+
+    String getSpecVersion();
     
-    @Before
-    public void setUp() {
-        NativeLibNotify nativeLibNotify = new NativeLibNotifyMock();
-        libNotify = new DefaultLibNotify(nativeLibNotify);
-    }
-
-    @Test
-    public void testInit() {
-        libNotify.init("test-init");
-    }
-
 }

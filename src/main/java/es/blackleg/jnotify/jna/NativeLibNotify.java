@@ -24,11 +24,17 @@ import com.sun.jna.Pointer;
  */
 public interface NativeLibNotify extends Library {
     
-    GBoolean notify_init(String appName);
+    GBoolean notify_init(String app_name);
     
     GBoolean notify_is_initted();
     
     void notify_uninit();
+    
+    String notify_get_app_name();
+    
+    void notify_set_app_name(String app_name);
+    
+    GBoolean notify_get_server_info(String[] ret_name, String[] ret_vendor, String[] ret_version, String[] ret_spec_version);
     
     Pointer notify_notification_new(String summary, String body, String icon);
     

@@ -24,9 +24,12 @@ import es.blackleg.jnotify.jna.NativeLibNotify;
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
 public class NativeLibNotifyMock implements NativeLibNotify {
+    
+    private String appName;
 
     @Override
     public GBoolean notify_init(String appName) {
+        this.appName = appName;
         return GBoolean.TRUE;
     }
 
@@ -52,6 +55,21 @@ public class NativeLibNotifyMock implements NativeLibNotify {
 
     @Override
     public GBoolean notify_notification_close(Pointer notification, Pointer error) {
+        return GBoolean.TRUE;
+    }
+
+    @Override
+    public String notify_get_app_name() {
+        return appName;
+    }
+
+    @Override
+    public void notify_set_app_name(String appName) {
+        this.appName = appName;
+    }
+
+    @Override
+    public GBoolean notify_get_server_info(String[] ret_name, String[] ret_vendor, String[] ret_version, String[] ret_spec_version) {
         return GBoolean.TRUE;
     }
     

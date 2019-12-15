@@ -37,7 +37,7 @@ public class DefaultLibNotifyLoader implements LibNotifyLoader {
         defaultTypeMapper.addTypeConverter(GBoolean.class, enumConverter);
         Map<String, Object> options = new HashMap<>();
         options.put(Library.OPTION_TYPE_MAPPER, defaultTypeMapper);
-        return new BasicLibNotify(Native.load("libnotify.so.4", NativeLibNotify.class, options));
+        return new DefaultLibNotify(Native.load("libnotify.so.4", NativeLibNotify.class, options));
     }
     
     public static LibNotifyLoader getInstance() {

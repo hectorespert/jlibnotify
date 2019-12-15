@@ -15,22 +15,32 @@
  */
 package es.blackleg.jnotify;
 
+import java.util.Collection;
+
 /**
  *
  * @author Hector Espert
  */
 public interface LibNotify {
     
-    public void init(String appName);
+    void init(String appName);
     
-    public boolean isAvailable();
+    boolean isAvailable();
 
-    public void unInit();
+    void unInit();
+    
+    String getAppName();
+    
+    void setAppName(String appName);
+    
+    ServerInfo getServerInfo();
+    
+    Collection<String> getServerCapabilities();
 
-    public Notification createNotification(String summary, String body, String icon);
+    Notification createNotification(String summary, String body, String icon);
 
-    public void showNotification(Notification notification);
+    void showNotification(Notification notification);
 
-    public void closeNotification(Notification notification);
+    void closeNotification(Notification notification);
     
 }
