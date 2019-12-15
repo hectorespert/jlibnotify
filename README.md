@@ -1,1 +1,1 @@
-# Java binding for libnotify (jnotify)
+# Java binding for libnotify (jlibnotify)
