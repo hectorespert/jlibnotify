@@ -29,6 +29,12 @@ import java.util.Map;
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
 public class DefaultLibNotifyLoader implements LibNotifyLoader {
+    
+    private ServerCapabilitiesReader serverCapabilitiesReader = new ServerCapabilitiesReader();
+
+    public void changeServerCapabilitiesReader(ServerCapabilitiesReader serverCapabilitiesReader) {
+        this.serverCapabilitiesReader = serverCapabilitiesReader;
+    }
 
     @Override
     public LibNotify load() {
@@ -37,7 +43,8 @@ public class DefaultLibNotifyLoader implements LibNotifyLoader {
         defaultTypeMapper.addTypeConverter(GBoolean.class, enumConverter);
         Map<String, Object> options = new HashMap<>();
         options.put(Library.OPTION_TYPE_MAPPER, defaultTypeMapper);
-        return new DefaultLibNotify(Native.load("libnotify.so.4", NativeLibNotify.class, options));
+        NativeLibNotify nativeLibNotify = Native.load("libnotify.so.4", NativeLibNotify.class, options);
+        return new DefaultLibNotify(nativeLibNotify, serverCapabilitiesReader);
     }
     
     public static LibNotifyLoader getInstance() {

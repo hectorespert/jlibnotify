@@ -15,10 +15,7 @@
  */
 package es.blackleg.jlibnotify;
 
-import es.blackleg.jlibnotify.LibNotify;
-import es.blackleg.jlibnotify.Notification;
-import es.blackleg.jlibnotify.DefaultLibNotifyLoader;
-import es.blackleg.jlibnotify.ServerInfo;
+import java.util.Collection;
 import java.util.Objects;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.After;
@@ -67,6 +64,13 @@ public class LibNotifyIT {
         assertThat(serverInfo).extracting(ServerInfo::getVendor).isNotNull();
         assertThat(serverInfo).extracting(ServerInfo::getVersion).isNotNull();
         assertThat(serverInfo).extracting(ServerInfo::getSpecVersion).isNotNull();
+    }
+    
+    @Test
+    public void testServerCapabilities() {
+        Collection<String> capabilities = libNotify.getServerCapabilities();
+        assertThat(capabilities).isNotEmpty();
+        assertThat(capabilities).contains("actions", "body", "body-markup", "icon-static", "persistence", "sound");
     }
 
     @Test

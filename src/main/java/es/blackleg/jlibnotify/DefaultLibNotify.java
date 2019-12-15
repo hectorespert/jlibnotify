@@ -27,9 +27,12 @@ import java.util.Collection;
 public class DefaultLibNotify implements LibNotify {
 
     private final NativeLibNotify nativeLibNotify;
+    
+    private final ServerCapabilitiesReader serverCapabilitiesReader;
 
-    public DefaultLibNotify(NativeLibNotify libNotify) {
+    public DefaultLibNotify(NativeLibNotify libNotify, ServerCapabilitiesReader serverCapabilitiesReader) {
         this.nativeLibNotify = libNotify;
+        this.serverCapabilitiesReader = serverCapabilitiesReader;
     }
 
     @Override
@@ -75,7 +78,7 @@ public class DefaultLibNotify implements LibNotify {
     
     @Override
     public Collection<String> getServerCapabilities() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return serverCapabilitiesReader.getServerCapabilitiesFromPointer(nativeLibNotify.notify_get_server_caps());
     }
 
     @Override
