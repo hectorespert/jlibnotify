@@ -1,1 +1,1 @@
-# jlibnotify
+# jnotify
