@@ -25,7 +25,9 @@ public class TestMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws InterruptedException {
-        LibNotifyWrapper libNotifyWrapper = new DefaultLibNotifyWrapper();
+        
+        LibNotify libNotifyWrapper = DefaultLibNotifyLoader.getInstance().load();
+        
         libNotifyWrapper.init("Test");
         
         LibNotifyNotification notification = libNotifyWrapper.createNotification("Summary", "Body", "dialog-information");

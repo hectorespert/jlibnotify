@@ -22,7 +22,7 @@ import com.sun.jna.Pointer;
  *
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
-public interface LibNotify extends Library {
+public interface NativeLibNotify extends Library {
     
     GBoolean notify_init(String appName);
     
