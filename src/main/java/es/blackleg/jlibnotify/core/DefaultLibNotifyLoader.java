@@ -13,12 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.blackleg.jlibnotify;
+package es.blackleg.jlibnotify.core;
 
+import es.blackleg.jlibnotify.core.ServerCapabilitiesReader;
 import com.sun.jna.DefaultTypeMapper;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 import com.sun.jna.platform.EnumConverter;
+import es.blackleg.jlibnotify.LibNotify;
+import es.blackleg.jlibnotify.LibNotifyLoader;
 import es.blackleg.jlibnotify.jna.GBoolean;
 import es.blackleg.jlibnotify.jna.NativeLibNotify;
 import java.util.HashMap;

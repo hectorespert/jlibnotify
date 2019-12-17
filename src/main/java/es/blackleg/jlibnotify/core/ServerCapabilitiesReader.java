@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.blackleg.jlibnotify;
+package es.blackleg.jlibnotify.core;
 
 import com.sun.jna.Pointer;
 import java.util.ArrayList;

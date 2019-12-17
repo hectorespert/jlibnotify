@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.blackleg.jlibnotify;
+package es.blackleg.jlibnotify.core;
 
 import com.sun.jna.Pointer;
+import es.blackleg.jlibnotify.LibNotify;
+import es.blackleg.jlibnotify.Notification;
+import es.blackleg.jlibnotify.ServerInfo;
 import es.blackleg.jlibnotify.jna.GBoolean;
 import es.blackleg.jlibnotify.jna.NativeLibNotify;
 import java.util.Collection;

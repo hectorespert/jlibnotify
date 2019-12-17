@@ -15,6 +15,8 @@
  */
 package es.blackleg.jlibnotify;
 
+import es.blackleg.jlibnotify.core.DefaultLibNotify;
+import es.blackleg.jlibnotify.core.DefaultLibNotifyLoader;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 
@@ -22,7 +24,7 @@ import org.junit.Test;
  *
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
-public class DefaultLibNotifyLoaderIT {
+public class LibNotifyLoaderIT {
 
     @Test
     public void testLoad() {

@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.blackleg.jlibnotify;
+package es.blackleg.jlibnotify.core;
 
-import es.blackleg.jlibnotify.BasicServerInfo;
-import static org.assertj.core.api.Assertions.assertThat;
+import es.blackleg.jlibnotify.LibNotify;
+import es.blackleg.jlibnotify.jna.NativeLibNotify;
+import es.blackleg.jlibnotify.test.NativeLibNotifyMock;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,18 +25,19 @@ import org.junit.Test;
  *
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
-public class BasicServerInfoTest {
-
-    private BasicServerInfo basicServerInfo;
+public class BasicLibNotifyTest {
+    
+    private LibNotify libNotify;
     
     @Before
     public void setUp() {
-        basicServerInfo = new BasicServerInfo("name", "vendor", "version", "specVersion");
+        NativeLibNotify nativeLibNotify = new NativeLibNotifyMock();
+        libNotify = new DefaultLibNotify(nativeLibNotify, null);
     }
 
     @Test
-    public void testToString() {
-        assertThat(basicServerInfo.toString()).isNotEmpty();
+    public void testInit() {
+        libNotify.init("test-init");
     }
-    
+
 }

@@ -15,6 +15,7 @@
  */
 package es.blackleg.jlibnotify;
 
+import es.blackleg.jlibnotify.core.DefaultLibNotifyLoader;
 import java.util.Collection;
 import java.util.Objects;
 import static org.assertj.core.api.Assertions.assertThat;
