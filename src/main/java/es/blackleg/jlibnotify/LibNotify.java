@@ -41,6 +41,10 @@ public interface LibNotify {
 
     void showNotification(Notification notification);
 
+    void updateNotification(Notification notification, String summary, String body, String icon);
+
+    void setTimeOut(Notification notification, int timeout);
+
     void closeNotification(Notification notification);
     
 }

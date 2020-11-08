@@ -80,10 +80,12 @@ public class LibNotifyIT {
         assertThat(notification).isNotNull();
         
         libNotify.showNotification(notification);
-        
+        libNotify.setTimeOut(notification,1000);
+        //Thread.sleep(1000);
+        libNotify.updateNotification(notification, "LibNotify IT override","LibNotify Integration test override", "dialog-information");
+        libNotify.showNotification(notification);
         Thread.sleep(1000);
-        
         libNotify.closeNotification(notification);
     }
-    
+
 }

@@ -33,15 +33,19 @@ public interface NativeLibNotify extends Library {
     String notify_get_app_name();
     
     void notify_set_app_name(String app_name);
-    
+
+    void notify_notification_set_timeout(Pointer notification, int timeout);
+
     GBoolean notify_get_server_info(String[] ret_name, String[] ret_vendor, String[] ret_version, String[] ret_spec_version);
-    
+
     Pointer notify_get_server_caps();
-    
+
     Pointer notify_notification_new(String summary, String body, String icon);
-    
+
     GBoolean notify_notification_show(Pointer notification, Pointer error);
-    
+
+    GBoolean notify_notification_update(Pointer notification, String summary, String body, String icon);
+
     GBoolean notify_notification_close(Pointer notification, Pointer error);
-    
+
 }

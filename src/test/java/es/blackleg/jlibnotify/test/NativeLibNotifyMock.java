@@ -24,8 +24,9 @@ import es.blackleg.jlibnotify.jna.NativeLibNotify;
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
 public class NativeLibNotifyMock implements NativeLibNotify {
-    
+
     private String appName;
+    private int timeout;
 
     @Override
     public GBoolean notify_init(String appName) {
@@ -54,6 +55,11 @@ public class NativeLibNotifyMock implements NativeLibNotify {
     }
 
     @Override
+    public GBoolean notify_notification_update(Pointer notification, String summary, String body, String icon) {
+        return GBoolean.TRUE;
+    }
+
+    @Override
     public GBoolean notify_notification_close(Pointer notification, Pointer error) {
         return GBoolean.TRUE;
     }
@@ -66,6 +72,11 @@ public class NativeLibNotifyMock implements NativeLibNotify {
     @Override
     public void notify_set_app_name(String appName) {
         this.appName = appName;
+    }
+
+    @Override
+    public void notify_notification_set_timeout(Pointer notification, int timeout) {
+        this.timeout = timeout;
     }
 
     @Override
