@@ -30,7 +30,7 @@ import java.util.Collection;
 public class DefaultLibNotify implements LibNotify {
 
     private final NativeLibNotify nativeLibNotify;
-    
+
     private final ServerCapabilitiesReader serverCapabilitiesReader;
 
     public DefaultLibNotify(NativeLibNotify libNotify, ServerCapabilitiesReader serverCapabilitiesReader) {
@@ -54,7 +54,7 @@ public class DefaultLibNotify implements LibNotify {
     public void unInit() {
         nativeLibNotify.notify_uninit();
     }
-    
+
     @Override
     public String getAppName() {
         return nativeLibNotify.notify_get_app_name();
@@ -64,21 +64,21 @@ public class DefaultLibNotify implements LibNotify {
     public void setAppName(String appName) {
         nativeLibNotify.notify_set_app_name(appName);
     }
-    
+
     @Override
     public ServerInfo getServerInfo() {
         String[] name = new String[1];
         String[] vendor = new String[1];
         String[] version = new String[1];
         String[] specVersion = new String[1];
-        
+
         if (nativeLibNotify.notify_get_server_info(name, vendor, version, specVersion)== GBoolean.FALSE) {
             throw new RuntimeException("Error when get server info");
         }
-        
+
         return new BasicServerInfo(name[0], vendor[0], version[0], specVersion[0]);
     }
-    
+
     @Override
     public Collection<String> getServerCapabilities() {
         return serverCapabilitiesReader.getServerCapabilitiesFromPointer(nativeLibNotify.notify_get_server_caps());
@@ -95,6 +95,18 @@ public class DefaultLibNotify implements LibNotify {
         if (nativeLibNotify.notify_notification_show(notification.getPointer(), Pointer.NULL) == GBoolean.FALSE) {
             throw new RuntimeException("Error when show notification");
         }
+    }
+
+    @Override
+    public void updateNotification(Notification notification, String summary, String body, String icon) {
+        if ( nativeLibNotify.notify_notification_update(notification.getPointer(), summary, body, icon) == GBoolean.FALSE) {
+            throw new RuntimeException("Error when showing notification");
+        }
+    }
+
+    @Override
+    public void setTimeOut(Notification notification, int timeout) {
+        nativeLibNotify.notify_notification_set_timeout(notification.getPointer(), timeout);
     }
 
     @Override
