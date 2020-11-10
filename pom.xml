@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>es.blackleg</groupId>
     <artifactId>jlibnotify</artifactId>
-    <version>0.2.0</version>
+    <version>0.2.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -31,7 +31,7 @@
         <connection>scm:git:git@github.com:blackleg/jlibnotify.git</connection>
         <developerConnection>scm:git:git@github.com:blackleg/jlibnotify.git</developerConnection>
         <url>https://github.com/blackleg/jlibnotify</url>
-        <tag>jlibnotify-0.2.0</tag>
+        <tag>HEAD</tag>
     </scm>
     <profiles>
         <profile>
