@@ -25,7 +25,7 @@ import org.junit.Test;
  *
  * @author Hector Espert
  */
-public class LibNotifyLoaderIT {
+public class JLibnotifyLoaderIT {
 
     @Test
     public void testLoad() throws JLibnotifyLoadException {
