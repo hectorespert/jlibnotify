@@ -17,19 +17,22 @@ package es.blackleg.jlibnotify.test;
 
 import com.sun.jna.Pointer;
 import es.blackleg.jlibnotify.jna.GBoolean;
-import es.blackleg.jlibnotify.jna.NativeLibNotify;
+import es.blackleg.jlibnotify.jna.NativeLibnotify;
 
 /**
  *
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
-public class NativeLibNotifyMock implements NativeLibNotify {
+public class NativeLibNotifyMock implements NativeLibnotify {
 
     private String appName;
     private int timeout;
 
     @Override
     public GBoolean notify_init(String appName) {
+        if ("failOnInit".equals(appName)) {
+            return GBoolean.FALSE;
+        }
         this.appName = appName;
         return GBoolean.TRUE;
     }

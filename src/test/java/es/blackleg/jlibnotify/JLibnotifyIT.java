@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Hector Espert <hectorespertpardo@gmail.com>.
+ * Copyright 2019 Hector Espert.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,9 @@
  */
 package es.blackleg.jlibnotify;
 
-import es.blackleg.jlibnotify.core.DefaultLibNotifyLoader;
+import es.blackleg.jlibnotify.core.DefaultJLibnotifyLoader;
+import es.blackleg.jlibnotify.exception.JLibnotifyInitException;
+import es.blackleg.jlibnotify.exception.JLibnotifyLoadException;
 import java.util.Collection;
 import java.util.Objects;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,16 +27,16 @@ import org.junit.Test;
 
 /**
  *
- * @author Hector Espert <hectorespertpardo@gmail.com>
+ * @author Hector Espert
  */
-public class LibNotifyIT {
+public class JLibnotifyIT {
     
-    private LibNotify libNotify;
+    private JLibnotify libNotify;
     
     @Before
-    public void setUp() {
+    public void setUp() throws JLibnotifyLoadException, JLibnotifyInitException {
         if (Objects.isNull(libNotify)) {
-            libNotify = DefaultLibNotifyLoader.getInstance().load();
+            libNotify = DefaultJLibnotifyLoader.init().load();
         }
         
         assertThat(libNotify.isAvailable()).isFalse();

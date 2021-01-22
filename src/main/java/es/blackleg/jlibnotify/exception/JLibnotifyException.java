@@ -13,17 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.blackleg.jlibnotify.core;
-
-import com.sun.jna.Pointer;
-import java.util.Collection;
+package es.blackleg.jlibnotify.exception;
 
 /**
  *
  * @author Hector Espert
  */
-public interface ServerCapabilitiesReader {
-    
-    Collection<String> getServerCapabilitiesFromPointer(Pointer pointer);
-    
+public class JLibnotifyException extends Exception {
+
+    public JLibnotifyException(String string) {
+        super(string);
+    }
+
+    public JLibnotifyException(String string, Throwable thrwbl) {
+        super(string, thrwbl);
+    }
+
 }

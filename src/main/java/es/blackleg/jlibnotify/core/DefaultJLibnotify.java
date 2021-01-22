@@ -16,53 +16,54 @@
 package es.blackleg.jlibnotify.core;
 
 import com.sun.jna.Pointer;
-import es.blackleg.jlibnotify.LibNotify;
 import es.blackleg.jlibnotify.Notification;
 import es.blackleg.jlibnotify.ServerInfo;
 import es.blackleg.jlibnotify.jna.GBoolean;
-import es.blackleg.jlibnotify.jna.NativeLibNotify;
 import java.util.Collection;
+import es.blackleg.jlibnotify.JLibnotify;
+import es.blackleg.jlibnotify.exception.JLibnotifyInitException;
+import es.blackleg.jlibnotify.jna.NativeLibnotify;
 
 /**
  *
  * @author Hector Espert
  */
-public class DefaultLibNotify implements LibNotify {
+public class DefaultJLibnotify implements JLibnotify {
 
-    private final NativeLibNotify nativeLibNotify;
+    private final NativeLibnotify nativeLibnotify;
 
     private final ServerCapabilitiesReader serverCapabilitiesReader;
 
-    public DefaultLibNotify(NativeLibNotify libNotify, ServerCapabilitiesReader serverCapabilitiesReader) {
-        this.nativeLibNotify = libNotify;
+    public DefaultJLibnotify(NativeLibnotify libnotify, ServerCapabilitiesReader serverCapabilitiesReader) {
+        this.nativeLibnotify = libnotify;
         this.serverCapabilitiesReader = serverCapabilitiesReader;
     }
 
     @Override
-    public void init(String appName) {
-        if (this.nativeLibNotify.notify_init(appName) == GBoolean.FALSE) {
-            throw new RuntimeException("Error when init libnotify");
+    public void init(String appName) throws JLibnotifyInitException {
+        if (this.nativeLibnotify.notify_init(appName) == GBoolean.FALSE) {
+            throw new JLibnotifyInitException(String.format("Unable to init %s app", appName));
         }
     }
 
     @Override
     public boolean isAvailable() {
-        return nativeLibNotify.notify_is_initted() == GBoolean.TRUE;
+        return nativeLibnotify.notify_is_initted() == GBoolean.TRUE;
     }
 
     @Override
     public void unInit() {
-        nativeLibNotify.notify_uninit();
+        nativeLibnotify.notify_uninit();
     }
 
     @Override
     public String getAppName() {
-        return nativeLibNotify.notify_get_app_name();
+        return nativeLibnotify.notify_get_app_name();
     }
 
     @Override
     public void setAppName(String appName) {
-        nativeLibNotify.notify_set_app_name(appName);
+        nativeLibnotify.notify_set_app_name(appName);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class DefaultLibNotify implements LibNotify {
         String[] version = new String[1];
         String[] specVersion = new String[1];
 
-        if (nativeLibNotify.notify_get_server_info(name, vendor, version, specVersion)== GBoolean.FALSE) {
+        if (nativeLibnotify.notify_get_server_info(name, vendor, version, specVersion)== GBoolean.FALSE) {
             throw new RuntimeException("Error when get server info");
         }
 
@@ -81,37 +82,37 @@ public class DefaultLibNotify implements LibNotify {
 
     @Override
     public Collection<String> getServerCapabilities() {
-        return serverCapabilitiesReader.getServerCapabilitiesFromPointer(nativeLibNotify.notify_get_server_caps());
+        return serverCapabilitiesReader.getServerCapabilitiesFromPointer(nativeLibnotify.notify_get_server_caps());
     }
 
     @Override
     public Notification createNotification(String summary, String body, String icon) {
-        Pointer pointer = nativeLibNotify.notify_notification_new(summary, body, icon);
+        Pointer pointer = nativeLibnotify.notify_notification_new(summary, body, icon);
         return new BasicNotification(pointer, summary, body, icon);
     }
 
     @Override
     public void showNotification(Notification notification) {
-        if (nativeLibNotify.notify_notification_show(notification.getPointer(), Pointer.NULL) == GBoolean.FALSE) {
+        if (nativeLibnotify.notify_notification_show(notification.getPointer(), Pointer.NULL) == GBoolean.FALSE) {
             throw new RuntimeException("Error when show notification");
         }
     }
 
     @Override
     public void updateNotification(Notification notification, String summary, String body, String icon) {
-        if ( nativeLibNotify.notify_notification_update(notification.getPointer(), summary, body, icon) == GBoolean.FALSE) {
+        if ( nativeLibnotify.notify_notification_update(notification.getPointer(), summary, body, icon) == GBoolean.FALSE) {
             throw new RuntimeException("Error when showing notification");
         }
     }
 
     @Override
     public void setTimeOut(Notification notification, int timeout) {
-        nativeLibNotify.notify_notification_set_timeout(notification.getPointer(), timeout);
+        nativeLibnotify.notify_notification_set_timeout(notification.getPointer(), timeout);
     }
 
     @Override
     public void closeNotification(Notification notification) {
-        if (nativeLibNotify.notify_notification_close(notification.getPointer(), Pointer.NULL) == GBoolean.FALSE) {
+        if (nativeLibnotify.notify_notification_close(notification.getPointer(), Pointer.NULL) == GBoolean.FALSE) {
             throw new RuntimeException("Error when show notification");
         }
     }

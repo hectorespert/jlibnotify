@@ -15,15 +15,16 @@
  */
 package es.blackleg.jlibnotify;
 
+import es.blackleg.jlibnotify.exception.JLibnotifyInitException;
 import java.util.Collection;
 
 /**
  *
  * @author Hector Espert
  */
-public interface LibNotify {
+public interface JLibnotify {
     
-    void init(String appName);
+    void init(String appName) throws JLibnotifyInitException;
     
     boolean isAvailable();
 

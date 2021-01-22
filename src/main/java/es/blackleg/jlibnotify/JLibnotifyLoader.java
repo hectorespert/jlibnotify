@@ -15,12 +15,14 @@
  */
 package es.blackleg.jlibnotify;
 
+import es.blackleg.jlibnotify.exception.JLibnotifyLoadException;
+
 /**
  *
  * @author Hector Espert <hectorespertpardo@gmail.com>
  */
-public interface LibNotifyLoader {
+public interface JLibnotifyLoader {
     
-    LibNotify load();
+    JLibnotify load() throws JLibnotifyLoadException;
 
 }

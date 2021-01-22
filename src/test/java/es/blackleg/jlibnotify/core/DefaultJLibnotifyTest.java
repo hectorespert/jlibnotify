@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Hector Espert <hectorespertpardo@gmail.com>.
+ * Copyright 2019 Hector Espert.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,29 +15,36 @@
  */
 package es.blackleg.jlibnotify.core;
 
-import es.blackleg.jlibnotify.LibNotify;
-import es.blackleg.jlibnotify.jna.NativeLibNotify;
 import es.blackleg.jlibnotify.test.NativeLibNotifyMock;
 import org.junit.Before;
 import org.junit.Test;
+import es.blackleg.jlibnotify.JLibnotify;
+import es.blackleg.jlibnotify.exception.JLibnotifyInitException;
+import es.blackleg.jlibnotify.jna.NativeLibnotify;
 
 /**
  *
- * @author Hector Espert <hectorespertpardo@gmail.com>
+ * @author Hector Espert
  */
-public class BasicLibNotifyTest {
+public class DefaultJLibnotifyTest {
     
-    private LibNotify libNotify;
+    private JLibnotify libNotify;
     
     @Before
     public void setUp() {
-        NativeLibNotify nativeLibNotify = new NativeLibNotifyMock();
-        libNotify = new DefaultLibNotify(nativeLibNotify, null);
+        NativeLibnotify nativeLibNotify = new NativeLibNotifyMock();
+        libNotify = new DefaultJLibnotify(nativeLibNotify, null);
     }
 
     @Test
-    public void testInit() {
+    public void testInit() throws JLibnotifyInitException {
         libNotify.init("test-init");
     }
+    
+    @Test(expected = JLibnotifyInitException.class)
+    public void testFailedInit() throws JLibnotifyInitException {
+        libNotify.init("failOnInit");
+    }
+
 
 }
