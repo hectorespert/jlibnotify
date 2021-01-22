@@ -22,7 +22,7 @@ import es.blackleg.jlibnotify.jna.NativeLibnotify;
 
 /**
  *
- * @author Hector Espert <hectorespertpardo@gmail.com>
+ * @author Hector Espert
  */
 public class DefaultJLibnotifyNotification implements JLibnotifyNotification {
     

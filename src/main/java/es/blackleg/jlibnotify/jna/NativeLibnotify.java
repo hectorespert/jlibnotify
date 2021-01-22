@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Hector Espert <hectorespertpardo@gmail.com>.
+ * Copyright 2019 Hector Espert.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.sun.jna.Pointer;
 
 /**
  *
- * @author Hector Espert <hectorespertpardo@gmail.com>
+ * @author Hector Espert
  */
 public interface NativeLibnotify extends Library {
     
