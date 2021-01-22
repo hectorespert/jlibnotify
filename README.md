@@ -1,7 +1,7 @@
 # Java binding for libnotify (jlibnotify)
 
 ![Maven Central](https://img.shields.io/maven-central/v/es.blackleg/jlibnotify?style=flat-square)
-[![Build Status](https://travis-ci.org/hectorespert/jlibnotify.svg?branch=master)](https://travis-ci.org/hectorespert/jlibnotify)
+![Java CI with Maven](https://github.com/hectorespert/jlibnotify/workflows/Java%20CI%20with%20Maven/badge.svg)
 
 [Libnotify](https://developer.gnome.org/libnotify/) Java binding using [Java JNA](https://github.com/java-native-access/jna).
 
