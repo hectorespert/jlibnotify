@@ -39,16 +39,16 @@ public class JLibnotifyIT {
             libNotify = DefaultJLibnotifyLoader.init().load();
         }
         
-        assertThat(libNotify.isAvailable()).isFalse();
+        assertThat(libNotify.isInitted()).isFalse();
         libNotify.init("LibNotifyIT");
-        assertThat(libNotify.isAvailable()).isTrue();
+        assertThat(libNotify.isInitted()).isTrue();
     }
     
     @After
     public void tearDown() {
-        assertThat(libNotify.isAvailable()).isTrue();
+        assertThat(libNotify.isInitted()).isTrue();
         libNotify.unInit();
-        assertThat(libNotify.isAvailable()).isFalse();
+        assertThat(libNotify.isInitted()).isFalse();
     }
     
     
@@ -78,16 +78,16 @@ public class JLibnotifyIT {
 
     @Test
     public void testNotification() throws InterruptedException {
-        Notification notification = libNotify.createNotification("LibNotify IT", "LibNotify Integration test", "dialog-information");
+        JLibnotifyNotification notification = libNotify.createNotification("LibNotify IT", "LibNotify Integration test", "dialog-information");
         assertThat(notification).isNotNull();
         
-        libNotify.showNotification(notification);
-        libNotify.setTimeOut(notification,1000);
-        //Thread.sleep(1000);
-        libNotify.updateNotification(notification, "LibNotify IT override","LibNotify Integration test override", "dialog-information");
-        libNotify.showNotification(notification);
+        notification.show();
+        notification.setTimeOut(6000);
         Thread.sleep(1000);
-        libNotify.closeNotification(notification);
+        notification.update("LibNotify IT override","LibNotify Integration test override", "dialog-information");
+        notification.show();
+        Thread.sleep(1000);
+        notification.close();
     }
 
 }

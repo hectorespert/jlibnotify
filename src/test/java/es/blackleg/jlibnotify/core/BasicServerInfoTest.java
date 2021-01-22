@@ -15,7 +15,6 @@
  */
 package es.blackleg.jlibnotify.core;
 
-import es.blackleg.jlibnotify.core.BasicServerInfo;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;

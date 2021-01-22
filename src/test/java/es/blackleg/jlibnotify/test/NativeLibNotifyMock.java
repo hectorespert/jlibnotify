@@ -27,6 +27,8 @@ public class NativeLibNotifyMock implements NativeLibnotify {
 
     private String appName;
     private int timeout;
+    
+    private boolean initted = false;
 
     @Override
     public GBoolean notify_init(String appName) {
@@ -34,17 +36,21 @@ public class NativeLibNotifyMock implements NativeLibnotify {
             return GBoolean.FALSE;
         }
         this.appName = appName;
+        this.initted = true;
         return GBoolean.TRUE;
     }
 
     @Override
     public GBoolean notify_is_initted() {
-        return GBoolean.TRUE;
+        if (initted) {
+            return GBoolean.TRUE;
+        }
+        return GBoolean.FALSE;
     }
 
     @Override
     public void notify_uninit() {
-        
+        this.initted = false;
     }
 
     @Override

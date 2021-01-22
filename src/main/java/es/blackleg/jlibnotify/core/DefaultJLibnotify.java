@@ -16,13 +16,13 @@
 package es.blackleg.jlibnotify.core;
 
 import com.sun.jna.Pointer;
-import es.blackleg.jlibnotify.Notification;
 import es.blackleg.jlibnotify.ServerInfo;
 import es.blackleg.jlibnotify.jna.GBoolean;
 import java.util.Collection;
 import es.blackleg.jlibnotify.JLibnotify;
 import es.blackleg.jlibnotify.exception.JLibnotifyInitException;
 import es.blackleg.jlibnotify.jna.NativeLibnotify;
+import es.blackleg.jlibnotify.JLibnotifyNotification;
 
 /**
  *
@@ -47,7 +47,7 @@ public class DefaultJLibnotify implements JLibnotify {
     }
 
     @Override
-    public boolean isAvailable() {
+    public boolean isInitted() {
         return nativeLibnotify.notify_is_initted() == GBoolean.TRUE;
     }
 
@@ -86,35 +86,9 @@ public class DefaultJLibnotify implements JLibnotify {
     }
 
     @Override
-    public Notification createNotification(String summary, String body, String icon) {
+    public JLibnotifyNotification createNotification(String summary, String body, String icon) {
         Pointer pointer = nativeLibnotify.notify_notification_new(summary, body, icon);
-        return new BasicNotification(pointer, summary, body, icon);
-    }
-
-    @Override
-    public void showNotification(Notification notification) {
-        if (nativeLibnotify.notify_notification_show(notification.getPointer(), Pointer.NULL) == GBoolean.FALSE) {
-            throw new RuntimeException("Error when show notification");
-        }
-    }
-
-    @Override
-    public void updateNotification(Notification notification, String summary, String body, String icon) {
-        if ( nativeLibnotify.notify_notification_update(notification.getPointer(), summary, body, icon) == GBoolean.FALSE) {
-            throw new RuntimeException("Error when showing notification");
-        }
-    }
-
-    @Override
-    public void setTimeOut(Notification notification, int timeout) {
-        nativeLibnotify.notify_notification_set_timeout(notification.getPointer(), timeout);
-    }
-
-    @Override
-    public void closeNotification(Notification notification) {
-        if (nativeLibnotify.notify_notification_close(notification.getPointer(), Pointer.NULL) == GBoolean.FALSE) {
-            throw new RuntimeException("Error when show notification");
-        }
+        return new DefaultJLibnotifyNotification(pointer, nativeLibnotify);
     }
 
 }

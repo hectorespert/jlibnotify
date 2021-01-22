@@ -21,6 +21,7 @@ import org.junit.Test;
 import es.blackleg.jlibnotify.JLibnotify;
 import es.blackleg.jlibnotify.exception.JLibnotifyInitException;
 import es.blackleg.jlibnotify.jna.NativeLibnotify;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  *
@@ -44,6 +45,15 @@ public class DefaultJLibnotifyTest {
     @Test(expected = JLibnotifyInitException.class)
     public void testFailedInit() throws JLibnotifyInitException {
         libNotify.init("failOnInit");
+    }
+    
+    @Test
+    public void testIsInitted() throws JLibnotifyInitException {
+        libNotify.init("test-init");
+        assertThat(libNotify.isInitted()).isTrue();
+        
+        libNotify.unInit();
+        assertThat(libNotify.isInitted()).isFalse();
     }
 
 

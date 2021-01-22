@@ -26,7 +26,7 @@ public interface JLibnotify {
     
     void init(String appName) throws JLibnotifyInitException;
     
-    boolean isAvailable();
+    boolean isInitted();
 
     void unInit();
     
@@ -38,14 +38,15 @@ public interface JLibnotify {
     
     Collection<String> getServerCapabilities();
 
-    Notification createNotification(String summary, String body, String icon);
+    JLibnotifyNotification createNotification(String summary, String body, String icon);
 
-    void showNotification(Notification notification);
-
-    void updateNotification(Notification notification, String summary, String body, String icon);
-
-    void setTimeOut(Notification notification, int timeout);
-
-    void closeNotification(Notification notification);
+    //TODO: Change notification management
+//    void showNotification(Notification notification);
+//
+//    void updateNotification(Notification notification, String summary, String body, String icon);
+//
+//    void setTimeOut(Notification notification, int timeout);
+//
+//    void closeNotification(Notification notification);
     
 }
