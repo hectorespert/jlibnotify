@@ -39,14 +39,5 @@ public interface JLibnotify {
     Collection<String> getServerCapabilities();
 
     JLibnotifyNotification createNotification(String summary, String body, String icon);
-
-    //TODO: Change notification management
-//    void showNotification(Notification notification);
-//
-//    void updateNotification(Notification notification, String summary, String body, String icon);
-//
-//    void setTimeOut(Notification notification, int timeout);
-//
-//    void closeNotification(Notification notification);
     
 }
