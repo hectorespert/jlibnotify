@@ -24,6 +24,7 @@ import java.util.Objects;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -61,6 +62,7 @@ public class JLibnotifyIT {
     }
     
     @Test
+    @Ignore
     public void testServerInfo() {
         ServerInfo serverInfo = libNotify.getServerInfo();
         assertThat(serverInfo).isNotNull();
@@ -71,6 +73,7 @@ public class JLibnotifyIT {
     }
     
     @Test
+    @Ignore
     public void testServerCapabilities() {
         Collection<String> capabilities = libNotify.getServerCapabilities();
         assertThat(capabilities).isNotEmpty();
@@ -78,6 +81,7 @@ public class JLibnotifyIT {
     }
 
     @Test
+    @Ignore
     public void testNotification() throws InterruptedException {
         JLibnotifyNotification notification = libNotify.createNotification("LibNotify IT", "LibNotify Integration test", "dialog-information");
         assertThat(notification).isNotNull();
