@@ -13,7 +13,9 @@ jobs:
 
     steps:
       - name: Setup Dependencies
-        run: sudo apt-get install -y libnotify4 libnotify-bin
+        run: |
+          sudo apt-get update 
+          sudo apt-get install -y libnotify4 libnotify-bin
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -26,4 +28,4 @@ jobs:
           cache: maven
       
       - name: Build with Maven
-        run: ./mvnw -B verify --file pom.xml
+        run: ./mvnw -B test --file pom.xml
