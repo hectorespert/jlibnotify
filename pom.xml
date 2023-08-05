@@ -3,9 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>es.blackleg</groupId>
     <artifactId>jlibnotify</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>${revision}${sha1}${changelist}</version>
     <packaging>jar</packaging>
     <properties>
+    <revision>1.0.1</revision>
+        <changelist>-SNAPSHOT</changelist>
+        <sha1/>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -76,6 +79,31 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.5.0</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
@@ -121,15 +149,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>3.0.1</version>
-                <configuration>
-                    <preparationProfiles>release</preparationProfiles>
-                    <releaseProfiles>release</releaseProfiles>
-                </configuration>
             </plugin>
         </plugins>
     </build>
