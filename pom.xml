@@ -150,14 +150,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-  <groupId>org.apache.maven.plugins</groupId>
-  <artifactId>maven-scm-publish-plugin</artifactId>
-  <version>3.2.1</version>
-  <configuration>
-    <scmBranch>gh-pages</scmBranch>
-  </configuration>
-</plugin>
         </plugins>
     </build>
     <dependencyManagement>
@@ -209,9 +201,5 @@
             <id>ossrh</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
-        <site>
-            <id>github</id>
-            <url>scm:git:git@github.com:hectorespert/jlibnotify.git</url>
-        </site>
     </distributionManagement>
 </project>
