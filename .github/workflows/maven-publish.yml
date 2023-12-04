@@ -57,7 +57,7 @@ jobs:
         OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
     
     - name: Site generation
-      run: ./mvnw -B site --file pom.xml
+      run: ./mvnw  -s $GITHUB_WORKSPACE/settings.xml -B site --file pom.xml -P release -Drevision=$GITHUB_REF_NAME -Dchangelist= --file pom.xml
 
     - name: Setup Pages
       uses: actions/configure-pages@v3
