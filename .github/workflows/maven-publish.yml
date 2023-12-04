@@ -4,13 +4,24 @@ on:
   release:
     types: [created]
 
+permissions:
+  contents: read
+  pages: write
+  packages: write
+  id-token: write
+
+concurrency:
+  group: "publish"
+  cancel-in-progress: false
+
 jobs:
   build-and-publish:
 
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+    runs-on: ubuntu-latest      
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
     - name: Setup Dependencies
@@ -44,3 +55,18 @@ jobs:
       env:
         OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+    
+    - name: Site generation
+      run: ./mvnw -B site --file pom.xml
+
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: 'target/site'
+      
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
