@@ -150,6 +150,14 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-scm-publish-plugin</artifactId>
+  <version>3.2.1</version>
+  <configuration>
+    <scmBranch>gh-pages</scmBranch>
+  </configuration>
+</plugin>
         </plugins>
     </build>
     <dependencyManagement>
@@ -192,17 +200,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <configuration>
-                    <configLocation>config/sun_checks.xml</configLocation>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
@@ -212,5 +209,9 @@
             <id>ossrh</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
+        <site>
+            <id>github</id>
+            <url>scm:git:git@github.com:hectorespert/jlibnotify.git</url>
+        </site>
     </distributionManagement>
 </project>
