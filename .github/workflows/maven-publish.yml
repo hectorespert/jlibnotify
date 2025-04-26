@@ -42,19 +42,15 @@ jobs:
         settings-path: ${{ github.workspace }}
         server-username: OSSRH_USERNAME
         server-password: OSSRH_PASSWORD
-
-    - name: Import GPG key
-      uses: crazy-max/ghaction-import-gpg@v6
-      with:
-        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-        passphrase: ${{ secrets.PASSPHRASE }}
-        fingerprint: FACCE9EDF1EF9AC9935A601BB2735E741E440CE7
+        gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+        gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
     - name: Build and publish to Apache Maven Central
       run: ./mvnw -s $GITHUB_WORKSPACE/settings.xml -B deploy -P release -Drevision=$GITHUB_REF_NAME -Dchangelist= --file pom.xml
       env:
         OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
     
     - name: Site generation
       run: ./mvnw  -s $GITHUB_WORKSPACE/settings.xml -B site --file pom.xml -P release -Drevision=$GITHUB_REF_NAME -Dchangelist= --file pom.xml
