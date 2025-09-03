@@ -39,21 +39,20 @@ jobs:
         distribution: 'temurin'
         cache: maven
         server-id: central
-        settings-path: ${{ github.workspace }}
         server-username: OSSRH_USERNAME
         server-password: OSSRH_PASSWORD
         gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
         gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
     - name: Build and publish to Apache Maven Central
-      run: ./mvnw -s $GITHUB_WORKSPACE/settings.xml -B deploy -P release -Drevision=$GITHUB_REF_NAME -Dchangelist= --file pom.xml
+      run: ./mvnw -B deploy -P release -Drevision=$GITHUB_REF_NAME -Dchangelist= --file pom.xml
       env:
         OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
         MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
     
     - name: Site generation
-      run: ./mvnw  -s $GITHUB_WORKSPACE/settings.xml -B site --file pom.xml -P release -Drevision=$GITHUB_REF_NAME -Dchangelist= --file pom.xml
+      run: ./mvnw -B site --file pom.xml -P release -Drevision=$GITHUB_REF_NAME -Dchangelist= --file pom.xml
 
     - name: Setup Pages
       uses: actions/configure-pages@v5
