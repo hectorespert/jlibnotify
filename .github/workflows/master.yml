@@ -24,6 +24,18 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+          server-id: central
+          server-username: OSSRH_USERNAME
+          server-password: OSSRH_PASSWORD
+          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+
+      - run: |
+          cat ~/.m2/settings.xml
+          echo $OSSRH_USERNAME
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
       
       - name: Test with Maven
         run: ./mvnw -B verify
