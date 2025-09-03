@@ -30,15 +30,12 @@ jobs:
           gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
-      - run: |
-          cat ~/.m2/settings.xml
-          echo $OSSRH_USERNAME
+      - name: Build and publish snapshot to Apache Maven Central
+        run: ./mvnw -B deploy -P release
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-      
-      - name: Test with Maven
-        run: ./mvnw -B verify
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
       - name: Test site generation
         run: ./mvnw -B site
