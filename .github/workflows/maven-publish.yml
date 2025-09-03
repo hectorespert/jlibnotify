@@ -44,7 +44,12 @@ jobs:
         gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
         gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
-    - run: cat ~/.m2/settings.xml
+    - run: |
+        cat ~/.m2/settings.xml
+        echo $OSSRH_USERNAME
+      env:
+        OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
 
     - name: Build and publish to Apache Maven Central
       run: ./mvnw -B deploy -P release -Drevision=$GITHUB_REF_NAME -Dchangelist= --file pom.xml
