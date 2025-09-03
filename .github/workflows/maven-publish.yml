@@ -44,6 +44,8 @@ jobs:
         gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
         gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
+    - run: cat ~/.m2/settings.xml
+
     - name: Build and publish to Apache Maven Central
       run: ./mvnw -B deploy -P release -Drevision=$GITHUB_REF_NAME -Dchangelist= --file pom.xml
       env:
@@ -52,7 +54,7 @@ jobs:
         MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
     
     - name: Site generation
-      run: ./mvnw -B site --file pom.xml -P release -Drevision=$GITHUB_REF_NAME -Dchangelist= --file pom.xml
+      run: ./mvnw -B site -P release -Drevision=$GITHUB_REF_NAME -Dchangelist= --file pom.xml
 
     - name: Setup Pages
       uses: actions/configure-pages@v5
