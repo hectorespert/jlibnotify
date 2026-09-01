@@ -29,4 +29,7 @@ implementation group: 'es.blackleg', name: 'jlibnotify', version: '1.1.1'
 - [Netbeans Native Notifications](https://github.com/hectorespert/nb-native-notifications)
 - [MediathekView](https://github.com/mediathekview/MediathekView)
 
+## Contributing
 
+Architecture notes, build and test commands, and project conventions are documented in
+[AGENTS.md](AGENTS.md).
