@@ -16,11 +16,22 @@
 package es.blackleg.jlibnotify.exception;
 
 /**
+ * Raised when the native libnotify library cannot be loaded.
+ *
+ * <p>Thrown by {@link es.blackleg.jlibnotify.JLibnotifyLoader#load()} when the shared library is
+ * missing or unusable, which is the case on any platform other than Linux. The original failure,
+ * usually an {@link UnsatisfiedLinkError}, is kept as the cause.</p>
  *
  * @author Hector Espert
  */
 public class JLibnotifyLoadException extends JLibnotifyException {
 
+    /**
+     * Creates an exception with a message and a cause.
+     *
+     * @param string message describing the failure
+     * @param thrwbl failure that caused this one, usually an {@link UnsatisfiedLinkError}
+     */
     public JLibnotifyLoadException(String string, Throwable thrwbl) {
         super(string, thrwbl);
     }

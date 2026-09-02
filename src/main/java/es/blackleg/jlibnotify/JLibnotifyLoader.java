@@ -18,11 +18,29 @@ package es.blackleg.jlibnotify;
 import es.blackleg.jlibnotify.exception.JLibnotifyLoadException;
 
 /**
+ * Loads the native libnotify library into the process.
+ *
+ * <p>This is the first step of any use of jlibnotify. The reference implementation is obtained
+ * from {@code DefaultJLibnotifyLoader.init()}:</p>
+ *
+ * <pre>{@code
+ * JLibnotify jLibnotify = DefaultJLibnotifyLoader.init().load();
+ * }</pre>
  *
  * @author Hector Espert
  */
 public interface JLibnotifyLoader {
-    
+
+    /**
+     * Loads the native library and returns a usable binding of it.
+     *
+     * <p>Loading depends on the host: the shared library has to be present, which is only the
+     * case on Linux systems with libnotify installed. The returned instance still has to be
+     * initialised with {@link JLibnotify#init(String)}.</p>
+     *
+     * @return a binding of the loaded library, not yet initialised
+     * @throws JLibnotifyLoadException if the native library is missing or cannot be loaded
+     */
     JLibnotify load() throws JLibnotifyLoadException;
 
 }

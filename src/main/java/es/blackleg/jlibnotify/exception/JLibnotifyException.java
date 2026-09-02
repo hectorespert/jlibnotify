@@ -16,15 +16,27 @@
 package es.blackleg.jlibnotify.exception;
 
 /**
+ * Parent of the checked exceptions raised by the library.
  *
  * @author Hector Espert
  */
 public class JLibnotifyException extends Exception {
 
+    /**
+     * Creates an exception with a message.
+     *
+     * @param string message describing the failure
+     */
     public JLibnotifyException(String string) {
         super(string);
     }
 
+    /**
+     * Creates an exception with a message and a cause.
+     *
+     * @param string message describing the failure
+     * @param thrwbl failure that caused this one
+     */
     public JLibnotifyException(String string, Throwable thrwbl) {
         super(string, thrwbl);
     }
