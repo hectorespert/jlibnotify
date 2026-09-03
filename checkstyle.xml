@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+        "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+        "https://checkstyle.org/dtds/configuration_1_3.dtd">
+
+<!--
+    Checkstyle rules for jlibnotify.
+
+    These encode the conventions AGENTS.md already documents, rather than a
+    general purpose ruleset: the Apache licence header, the @author tag, four
+    space indentation and no wildcard imports. Everything else is left out on
+    purpose, so a violation always means a real departure from the project
+    style instead of a disagreement with someone else's preferences.
+-->
+<module name="Checker">
+
+    <property name="severity" value="warning"/>
+    <property name="fileExtensions" value="java"/>
+
+    <!-- Every file carries the Apache 2.0 header. The copyright line varies in
+         year and in whether it includes the author email, so it is matched
+         loosely. -->
+    <module name="RegexpHeader">
+        <property name="header"
+                  value="^/\*$\n^ \* Copyright \d{4} Hector Espert.*\.$\n^ \*$\n^ \* Licensed under the Apache License, Version 2\.0 \(the &quot;License&quot;\);$"/>
+    </module>
+
+    <module name="NewlineAtEndOfFile"/>
+
+    <module name="FileTabCharacter">
+        <property name="eachLine" value="true"/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="[ \t]+$"/>
+        <property name="message" value="Line has trailing whitespace."/>
+    </module>
+
+    <module name="TreeWalker">
+
+        <!-- Imports -->
+        <module name="AvoidStarImport"/>
+        <module name="RedundantImport"/>
+        <module name="UnusedImports"/>
+
+        <!-- Layout -->
+        <module name="Indentation">
+            <property name="basicOffset" value="4"/>
+            <property name="caseIndent" value="4"/>
+            <property name="throwsIndent" value="8"/>
+            <property name="lineWrappingIndentation" value="8"/>
+            <property name="arrayInitIndent" value="4"/>
+        </module>
+        <module name="LeftCurly"/>
+        <module name="NeedBraces"/>
+        <module name="ModifierOrder"/>
+        <module name="UpperEll"/>
+
+        <!-- Javadoc: doclint already enforces that the comments are present and
+             well formed, so only the @author convention is checked here. -->
+        <module name="JavadocType">
+            <property name="authorFormat" value="Hector Espert"/>
+        </module>
+
+        <!-- Correctness -->
+        <module name="EqualsHashCode"/>
+        <module name="SimplifyBooleanExpression"/>
+        <module name="SimplifyBooleanReturn"/>
+        <module name="StringLiteralEquality"/>
+
+    </module>
+
+</module>
