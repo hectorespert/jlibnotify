@@ -126,6 +126,13 @@ bump a version by editing `<version>`** — the tag name is the version.
   mean a real departure from the project style. It covers the test sources too, reports at severity
   `warning` and does not fail the build; the tree is at zero violations, so anything the report
   shows is new.
+- **SpotBugs runs at max effort and low threshold**, tests included, filtered by
+  `spotbugs-exclude.xml`. That filter is only for what does not apply to a native binding — today a
+  single entry, the pointer `DefaultJLibnotifyNotification` has to hold. Real findings are left
+  visible: the four `THROWS_METHOD_THROWS_RUNTIMEEXCEPTION` are the bare `RuntimeException` that
+  `getServerInfo`, `show`, `update` and `close` throw, the same gap the TODO in `show()` records.
+  Do not silence those; fixing them means changing the exceptions the public API declares.
+  Note SpotBugs cannot read Java 25 class files, so run it on the JDK 21 CI uses, or on 17.
 - **Apache RAT audits the licence headers** of every file, not just the `.java` ones Checkstyle
   covers. Two traps worth knowing: RAT excludes any directory named `core` by default, meant for
   Unix core dumps, which silently skipped the whole `es.blackleg.jlibnotify.core` package until an

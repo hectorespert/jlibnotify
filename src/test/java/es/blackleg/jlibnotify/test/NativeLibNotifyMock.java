@@ -88,6 +88,10 @@ public class NativeLibNotifyMock implements NativeLibnotify {
         this.timeout = timeout;
     }
 
+    public int getTimeout() {
+        return timeout;
+    }
+
     @Override
     public GBoolean notify_get_server_info(String[] ret_name, String[] ret_vendor, String[] ret_version, String[] ret_spec_version) {
         return GBoolean.TRUE;
