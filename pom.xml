@@ -240,6 +240,26 @@
                 <version>3.9.0</version>
             </plugin>
             <plugin>
+                <groupId>org.apache.rat</groupId>
+                <artifactId>apache-rat-plugin</artifactId>
+                <version>0.18</version>
+                <configuration>
+                    <!-- RAT excludes any directory called "core" by default, meant for
+                         Unix core dumps. Here that silently skipped the whole
+                         es.blackleg.jlibnotify.core package, so it is included back. -->
+                    <inputIncludes>
+                        <inputInclude>**/core/**</inputInclude>
+                    </inputIncludes>
+                    <inputExcludes>
+                        <!-- Prose and IDE files, which carry no licence header. -->
+                        <inputExclude>**/*.md</inputExclude>
+                        <inputExclude>nb-configuration.xml</inputExclude>
+                        <inputExclude>nbactions-release.xml</inputExclude>
+                        <inputExclude>nbproject/**</inputExclude>
+                    </inputExcludes>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.6.0</version>

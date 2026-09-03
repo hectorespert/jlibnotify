@@ -126,6 +126,12 @@ bump a version by editing `<version>`** — the tag name is the version.
   mean a real departure from the project style. It covers the test sources too, reports at severity
   `warning` and does not fail the build; the tree is at zero violations, so anything the report
   shows is new.
+- **Apache RAT audits the licence headers** of every file, not just the `.java` ones Checkstyle
+  covers. Two traps worth knowing: RAT excludes any directory named `core` by default, meant for
+  Unix core dumps, which silently skipped the whole `es.blackleg.jlibnotify.core` package until an
+  `inputInclude` brought it back; and its configuration lives in `<reporting>`, so running
+  `rat:check` from the command line ignores it and reports a different set of files than the site
+  does. Prose and IDE files are excluded; the XML the project owns carries the header.
 - **japicmp compares the built jar against the latest release** resolved from the repository (the
   `RELEASE` meta-version), so it reports what a consumer upgrading from the published version would
   see. It only produces the HTML report; its XML, diff and markdown outputs are switched off so they
