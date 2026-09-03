@@ -126,6 +126,9 @@ bump a version by editing `<version>`** — the tag name is the version.
   mean a real departure from the project style. It covers the test sources too, reports at severity
   `warning` and does not fail the build; the tree is at zero violations, so anything the report
   shows is new.
+- **Taglist lists the open work** — `TODO`, `FIXME` and `XXX`, in the main and test sources. There
+  is exactly one today, in `DefaultJLibnotifyNotification.show()`, about capturing the native error
+  instead of throwing a bare `RuntimeException`.
 - **SpotBugs runs at max effort and low threshold**, tests included, filtered by
   `spotbugs-exclude.xml`. That filter is only for what does not apply to a native binding — today a
   single entry, the pointer `DefaultJLibnotifyNotification` has to hold. Real findings are left
