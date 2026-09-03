@@ -126,6 +126,12 @@ bump a version by editing `<version>`** — the tag name is the version.
   mean a real departure from the project style. It covers the test sources too, reports at severity
   `warning` and does not fail the build; the tree is at zero violations, so anything the report
   shows is new.
+- **CycloneDX writes an SBOM** at `package`, so `verify` and `deploy` both produce it. It is not a
+  site report: it attaches `-cyclonedx.xml` and `-cyclonedx.json` as artifacts, which the release
+  deploys to Maven Central next to the jar, the sources and the javadoc, signed by the same GPG key.
+  It records that the two JNA dependencies are dual licensed, LGPL-2.1-or-later and Apache-2.0, so a
+  consumer can see the whole chain is available under Apache-2.0. Its two schema validation warnings
+  are noise from the JSON validator; the BOM is written and validated regardless.
 - **Taglist lists the open work** — `TODO`, `FIXME` and `XXX`, in the main and test sources. There
   is exactly one today, in `DefaultJLibnotifyNotification.show()`, about capturing the native error
   instead of throwing a bare `RuntimeException`.
