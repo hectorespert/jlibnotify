@@ -19,8 +19,8 @@ import es.blackleg.jlibnotify.test.NativeLibNotifyMock;
 import org.junit.Before;
 import org.junit.Test;
 import es.blackleg.jlibnotify.JLibnotify;
+import es.blackleg.jlibnotify.JLibnotifyNotification;
 import es.blackleg.jlibnotify.exception.JLibnotifyInitException;
-import es.blackleg.jlibnotify.jna.NativeLibnotify;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -29,11 +29,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class DefaultJLibnotifyTest {
 
+    private NativeLibNotifyMock nativeLibNotify;
+
     private JLibnotify libNotify;
 
     @Before
     public void setUp() {
-        NativeLibnotify nativeLibNotify = new NativeLibNotifyMock();
+        nativeLibNotify = new NativeLibNotifyMock();
         libNotify = new DefaultJLibnotify(nativeLibNotify, null);
     }
 
@@ -56,5 +58,23 @@ public class DefaultJLibnotifyTest {
         assertThat(libNotify.isInitted()).isFalse();
     }
 
+    @Test
+    public void testCreateNotification() throws JLibnotifyInitException {
+        libNotify.init("test-init");
+
+        JLibnotifyNotification notification =
+                libNotify.createNotification("Summary", "Body", "dialog-information");
+
+        assertThat(notification).isNotNull();
+    }
+
+    @Test
+    public void testSetTimeOut() throws JLibnotifyInitException {
+        libNotify.init("test-init");
+
+        libNotify.createNotification("Summary", "Body", "dialog-information").setTimeOut(5000);
+
+        assertThat(nativeLibNotify.getTimeout()).isEqualTo(5000);
+    }
 
 }
