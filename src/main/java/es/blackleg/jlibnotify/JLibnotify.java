@@ -49,7 +49,7 @@ public interface JLibnotify {
      * <p>Must be called before {@link #createNotification(String, String, String)}. The name is
      * the one notification servers display as the origin of the notifications.</p>
      *
-     * @param appName name identifying the application before the notification server
+     * @param appName name identifying the application to the notification server
      * @throws JLibnotifyInitException if libnotify refuses to initialise the session
      */
     void init(String appName) throws JLibnotifyInitException;
@@ -80,7 +80,7 @@ public interface JLibnotify {
     /**
      * Replaces the application name registered in the libnotify session.
      *
-     * @param appName name identifying the application before the notification server
+     * @param appName name identifying the application to the notification server
      */
     void setAppName(String appName);
 

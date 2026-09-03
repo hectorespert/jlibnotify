@@ -37,7 +37,7 @@ public interface NativeLibnotify extends Library {
     /**
      * Initialises the libnotify session, binding {@code notify_init}.
      *
-     * @param app_name name identifying the application before the notification server
+     * @param app_name name identifying the application to the notification server
      * @return {@link GBoolean#TRUE} if the session was initialised
      */
     GBoolean notify_init(String app_name);
@@ -64,7 +64,7 @@ public interface NativeLibnotify extends Library {
     /**
      * Replaces the registered application name, binding {@code notify_set_app_name}.
      *
-     * @param app_name name identifying the application before the notification server
+     * @param app_name name identifying the application to the notification server
      */
     void notify_set_app_name(String app_name);
 

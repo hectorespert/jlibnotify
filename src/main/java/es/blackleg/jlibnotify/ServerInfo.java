@@ -16,7 +16,7 @@
 package es.blackleg.jlibnotify;
 
 /**
- * Description a notification server gives of itself, as returned by
+ * The description a notification server gives of itself, as returned by
  * {@link JLibnotify#getServerInfo()}.
  *
  * <p>Useful to adapt to the desktop environment in use, together with

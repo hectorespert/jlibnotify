@@ -46,7 +46,7 @@ import es.blackleg.jlibnotify.jna.NativeLibnotify;
 public class DefaultJLibnotifyLoader implements JLibnotifyLoader {
 
     /**
-     * Name of the shared library loaded when none is given, the version 4 of libnotify.
+     * Name of the shared library loaded when none is given: version 4 of libnotify.
      */
     private static final String DEFAULT_LIBRARY_NAME = "libnotify.so.4";
 
