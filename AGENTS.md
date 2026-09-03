@@ -20,6 +20,7 @@ The Maven wrapper is checked in; always use `./mvnw`.
 ./mvnw verify                 # full build: unit tests + integration tests + sources/javadoc jars + coverage
 ./mvnw test                   # unit tests only (Surefire, *Test classes)
 ./mvnw verify -DskipITs       # skip the native-dependent integration tests
+./mvnw verify -DskipPitest    # skip the mutation analysis
 ./mvnw site                   # generate the Maven site (also checked in CI)
 ./mvnw clean                  # also cleans the generated .flattened-pom.xml
 ```
@@ -95,6 +96,25 @@ Tests are written against the **JUnit 4** API (`org.junit.Test`, `@Before`, `@Ig
 JUnit Platform via `junit-vintage-engine` (the POM tracks the JUnit 6 BOM). Assertions use AssertJ (`assertThat(...)`). Match the
 existing style in new tests rather than mixing in JUnit 5 annotations.
 
+### Mutation testing
+
+PIT runs at `verify` (`pitest-maven`, goal `mutationCoverage`) and writes `target/pit-reports`,
+which the `report` goal then publishes to the site. Two settings matter:
+
+- `targetTests` is pinned to `es.blackleg.jlibnotify.*Test`. Without it PIT also picks up the
+  `*IT` classes, and since they cannot pass without a real `libnotify.so.4` it aborts the whole
+  run with *"tests did not pass without mutation"* — mutation testing requires a green suite.
+  Mutation coverage therefore reflects the unit tests only.
+- `testStrengthThreshold` is `100` and there is deliberately **no** `mutationThreshold`. Test
+  strength counts only mutations on lines the tests actually execute, so the rule is "whatever the
+  tests touch, they must assert on"; the classes with no unit tests at all (the loader, the
+  capabilities reader) drag the mutation score down but are JaCoCo's business, not PIT's. Dropping
+  a single assertion from a covered test drops the score below 100 and fails the build.
+
+At the time it was added the numbers were 28 mutations, 7 killed (25%), 21 uncovered, test
+strength 100%. Killing the uncovered ones means writing unit tests around `NativeLibNotifyMock`,
+not touching the PIT configuration.
+
 ## Versioning and release
 
 The POM uses Maven CI-friendly versions: `${revision}${sha1}${changelist}`, defaulting to
@@ -116,8 +136,8 @@ bump a version by editing `<version>`** — the tag name is the version.
   fails the build. Every package also has a `package-info.java`. Run `./mvnw clean javadoc:javadoc`
   after touching comments — without `clean` the plugin skips regeneration and reports nothing.
 - The site reports come from the `<reporting>` section: Javadoc, the cross-referenced sources
-  (JXR), the Surefire/Failsafe test results, the JaCoCo coverage and the japicmp API compatibility
-  report. Most of them read what the build left in `target`, so `site` has to run in a workspace
+  (JXR), the Surefire/Failsafe test results, the JaCoCo coverage, the PIT mutation coverage and the
+  japicmp API compatibility report. Most of them read what the build left in `target`, so `site` has to run in a workspace
   where `verify` already ran — that is what CI does. A bare `mvnw site` on a clean checkout
   silently omits the test and coverage reports and fails on japicmp, which needs the built jar.
 - **The Checkstyle ruleset in `checkstyle.xml` encodes the conventions of this file**, not a general
