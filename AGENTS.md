@@ -126,6 +126,9 @@ bump a version by editing `<version>`** — the tag name is the version.
   mean a real departure from the project style. It covers the test sources too, reports at severity
   `warning` and does not fail the build; the tree is at zero violations, so anything the report
   shows is new.
+- **Taglist lists the open work** — `TODO`, `FIXME` and `XXX`, in the main and test sources. There
+  is exactly one today, in `DefaultJLibnotifyNotification.show()`, about capturing the native error
+  instead of throwing a bare `RuntimeException`.
 - **Apache RAT audits the licence headers** of every file, not just the `.java` ones Checkstyle
   covers. Two traps worth knowing: RAT excludes any directory named `core` by default, meant for
   Unix core dumps, which silently skipped the whole `es.blackleg.jlibnotify.core` package until an

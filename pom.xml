@@ -240,6 +240,27 @@
                 <version>3.9.0</version>
             </plugin>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>taglist-maven-plugin</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <tagListOptions>
+                        <tagClasses>
+                            <tagClass>
+                                <displayName>Open work</displayName>
+                                <tags>
+                                    <tag><matchString>TODO</matchString><matchType>ignoreCase</matchType></tag>
+                                    <tag><matchString>FIXME</matchString><matchType>ignoreCase</matchType></tag>
+                                    <tag><matchString>XXX</matchString><matchType>exact</matchType></tag>
+                                </tags>
+                            </tagClass>
+                        </tagClasses>
+                    </tagListOptions>
+                    <aggregate>false</aggregate>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
                 <version>0.18</version>
