@@ -34,7 +34,7 @@ public class JLibnotifyLoaderIT {
         assertThat(libNotifyLoader).isInstanceOf(DefaultJLibnotifyLoader.class);
         assertThat(libNotifyLoader.load()).isInstanceOf(DefaultJLibnotify.class);
     }
-    
+
     @Test(expected = JLibnotifyLoadException.class)
     public void testLoadBadLibrary() throws JLibnotifyLoadException {
         JLibnotifyLoader libNotifyLoader = new DefaultJLibnotifyLoader("badLibnotify.so");

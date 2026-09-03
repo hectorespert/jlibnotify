@@ -34,11 +34,11 @@ import es.blackleg.jlibnotify.jna.NativeLibnotify;
  * @author Hector Espert
  */
 public class DefaultJLibnotifyNotification implements JLibnotifyNotification {
-    
+
     private final Pointer pointer;
-    
+
     private final NativeLibnotify nativeLibnotify;
-    
+
     /**
      * Creates a notification over an existing native notification structure.
      *
@@ -49,7 +49,7 @@ public class DefaultJLibnotifyNotification implements JLibnotifyNotification {
         this.pointer = pointer;
         this.nativeLibnotify = nativeLibnotify;
     }
-    
+
     @Override
     public void show() {
         if (nativeLibnotify.notify_notification_show(pointer, Pointer.NULL) == GBoolean.FALSE) {
@@ -64,7 +64,7 @@ public class DefaultJLibnotifyNotification implements JLibnotifyNotification {
 
     @Override
     public void update(String summary, String body, String icon) {
-        if ( nativeLibnotify.notify_notification_update(pointer, summary, body, icon) == GBoolean.FALSE) {
+        if (nativeLibnotify.notify_notification_update(pointer, summary, body, icon) == GBoolean.FALSE) {
             throw new RuntimeException("Error when showing notification");
         }
     }

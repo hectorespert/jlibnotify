@@ -88,7 +88,7 @@ public class DefaultJLibnotify implements JLibnotify {
         String[] version = new String[1];
         String[] specVersion = new String[1];
 
-        if (nativeLibnotify.notify_get_server_info(name, vendor, version, specVersion)== GBoolean.FALSE) {
+        if (nativeLibnotify.notify_get_server_info(name, vendor, version, specVersion) == GBoolean.FALSE) {
             throw new RuntimeException("Error when get server info");
         }
 

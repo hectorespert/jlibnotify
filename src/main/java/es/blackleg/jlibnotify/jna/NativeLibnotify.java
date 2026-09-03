@@ -33,7 +33,7 @@ import com.sun.jna.Pointer;
  * @author Hector Espert
  */
 public interface NativeLibnotify extends Library {
-    
+
     /**
      * Initialises the libnotify session, binding {@code notify_init}.
      *
@@ -41,26 +41,26 @@ public interface NativeLibnotify extends Library {
      * @return {@link GBoolean#TRUE} if the session was initialised
      */
     GBoolean notify_init(String app_name);
-    
+
     /**
      * Tells whether the session is initialised, binding {@code notify_is_initted}.
      *
      * @return {@link GBoolean#TRUE} if the session is initialised
      */
     GBoolean notify_is_initted();
-    
+
     /**
      * Closes the session and frees its resources, binding {@code notify_uninit}.
      */
     void notify_uninit();
-    
+
     /**
      * Returns the registered application name, binding {@code notify_get_app_name}.
      *
      * @return the application name, or {@code null} if the session is not initialised
      */
     String notify_get_app_name();
-    
+
     /**
      * Replaces the registered application name, binding {@code notify_set_app_name}.
      *

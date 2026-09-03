@@ -28,9 +28,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Hector Espert
  */
 public class DefaultJLibnotifyTest {
-    
+
     private JLibnotify libNotify;
-    
+
     @Before
     public void setUp() {
         NativeLibnotify nativeLibNotify = new NativeLibNotifyMock();
@@ -41,17 +41,17 @@ public class DefaultJLibnotifyTest {
     public void testInit() throws JLibnotifyInitException {
         libNotify.init("test-init");
     }
-    
+
     @Test(expected = JLibnotifyInitException.class)
     public void testFailedInit() throws JLibnotifyInitException {
         libNotify.init("failOnInit");
     }
-    
+
     @Test
     public void testIsInitted() throws JLibnotifyInitException {
         libNotify.init("test-init");
         assertThat(libNotify.isInitted()).isTrue();
-        
+
         libNotify.unInit();
         assertThat(libNotify.isInitted()).isFalse();
     }
