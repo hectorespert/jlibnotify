@@ -17,7 +17,7 @@ from it is a breaking change for downstream users.
 The Maven wrapper is checked in; always use `./mvnw`.
 
 ```bash
-./mvnw verify                 # full build: unit tests + integration tests + sources/javadoc jars
+./mvnw verify                 # full build: unit tests + integration tests + sources/javadoc jars + coverage
 ./mvnw test                   # unit tests only (Surefire, *Test classes)
 ./mvnw verify -DskipITs       # skip the native-dependent integration tests
 ./mvnw site                   # generate the Maven site (also checked in CI)
@@ -115,6 +115,10 @@ bump a version by editing `<version>`** — the tag name is the version.
   `failOnWarnings`, so a missing `@param`, a broken `{@link}` or an undocumented public member
   fails the build. Every package also has a `package-info.java`. Run `./mvnw clean javadoc:javadoc`
   after touching comments — without `clean` the plugin skips regeneration and reports nothing.
+- The site reports come from the `<reporting>` section: Javadoc, the Surefire/Failsafe test results
+  and the JaCoCo coverage. They read what the build left in `target`, so `site` has to run in a
+  workspace where `verify` already ran — that is what CI does. A bare `mvnw site` on a clean
+  checkout silently omits the test and coverage reports.
 - The site pages live in `src/site/markdown` and its menus in `src/site/site.xml` (Doxia 2 format,
   root element `<site>`, banner and menu names are attributes). Links to hosts already used by the
   project `<url>` get relativised by Doxia, so check generated hrefs after adding one.
