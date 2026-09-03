@@ -31,7 +31,13 @@ import java.util.Objects;
  * @author Hector Espert
  */
 public class DefaultServerCapabilitiesReader implements ServerCapabilitiesReader {
-    
+
+    /**
+     * Creates a reader. It holds no state, so a single instance can be shared.
+     */
+    public DefaultServerCapabilitiesReader() {
+    }
+
     @Override
     public Collection<String> getServerCapabilitiesFromPointer(Pointer pointer) {
         List<String> serverCapabilities = new ArrayList<>();
