@@ -16,17 +16,42 @@
 package es.blackleg.jlibnotify;
 
 /**
+ * The description a notification server gives of itself, as returned by
+ * {@link JLibnotify#getServerInfo()}.
+ *
+ * <p>Useful to adapt to the desktop environment in use, together with
+ * {@link JLibnotify#getServerCapabilities()}.</p>
  *
  * @author Hector Espert
  */
 public interface ServerInfo {
-    
+
+    /**
+     * Returns the product name of the notification server.
+     *
+     * @return the server name, for instance {@code gnome-shell}
+     */
     String getName();
 
+    /**
+     * Returns the vendor of the notification server.
+     *
+     * @return the vendor name, for instance {@code GNOME}
+     */
     String getVendor();
 
+    /**
+     * Returns the version of the notification server.
+     *
+     * @return the server version
+     */
     String getVersion();
 
+    /**
+     * Returns the version of the freedesktop.org notification specification the server implements.
+     *
+     * @return the supported specification version, for instance {@code 1.2}
+     */
     String getSpecVersion();
-    
+
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Hector Espert.
+ * Copyright 2026 Hector Espert.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,25 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.blackleg.jlibnotify.exception;
 
 /**
- * Raised when libnotify refuses to initialise the notification session.
+ * Checked exceptions raised by the library.
  *
- * <p>Thrown by {@link es.blackleg.jlibnotify.JLibnotify#init(String)}, typically because the
- * application name is not accepted or because the session cannot be established.</p>
+ * <p>{@link es.blackleg.jlibnotify.exception.JLibnotifyException} is the common parent;
+ * {@link es.blackleg.jlibnotify.exception.JLibnotifyLoadException} reports a failure while
+ * loading the native library, and
+ * {@link es.blackleg.jlibnotify.exception.JLibnotifyInitException} a failure while initialising
+ * the notification session. They cover the two operations that can fail before any notification
+ * is created.</p>
  *
  * @author Hector Espert
  */
-public class JLibnotifyInitException extends JLibnotifyException {
-
-    /**
-     * Creates an exception with a message.
-     *
-     * @param string message describing the failure
-     */
-    public JLibnotifyInitException(String string) {
-        super(string);
-    }
-
-}
+package es.blackleg.jlibnotify.exception;

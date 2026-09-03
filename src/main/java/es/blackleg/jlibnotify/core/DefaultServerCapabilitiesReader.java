@@ -22,11 +22,22 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * Reference implementation of {@link ServerCapabilitiesReader}.
+ *
+ * <p>Walks the native {@code GList} node by node, reading each node as an array of two pointers
+ * where the first one is the capability string and the second one the next node of the list. This
+ * is the only place of the library that traverses native memory by hand.</p>
  *
  * @author Hector Espert
  */
 public class DefaultServerCapabilitiesReader implements ServerCapabilitiesReader {
-    
+
+    /**
+     * Creates a reader. It holds no state, so a single instance can be shared.
+     */
+    public DefaultServerCapabilitiesReader() {
+    }
+
     @Override
     public Collection<String> getServerCapabilitiesFromPointer(Pointer pointer) {
         List<String> serverCapabilities = new ArrayList<>();

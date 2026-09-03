@@ -18,6 +18,10 @@ package es.blackleg.jlibnotify.core;
 import es.blackleg.jlibnotify.ServerInfo;
 
 /**
+ * Immutable {@link ServerInfo} holding the values read from the notification server.
+ *
+ * <p>Implementation detail of {@link DefaultJLibnotify#getServerInfo()}; application code should
+ * depend on the {@link ServerInfo} interface instead.</p>
  *
  * @author Hector Espert
  */
@@ -31,6 +35,14 @@ public class BasicServerInfo implements ServerInfo {
     
     private final String specVersion;
 
+    /**
+     * Creates a description of a notification server.
+     *
+     * @param name        product name of the server
+     * @param vendor      vendor of the server
+     * @param version     version of the server
+     * @param specVersion version of the freedesktop.org notification specification it implements
+     */
     public BasicServerInfo(String name, String vendor, String version, String specVersion) {
         this.name = name;
         this.vendor = vendor;

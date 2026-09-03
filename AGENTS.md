@@ -111,5 +111,12 @@ bump a version by editing `<version>`** — the tag name is the version.
   No lambdas-only APIs, no `var`, no `List.of` — stay inside the Java 8 language and library surface.
 - Every source file starts with the Apache 2.0 license header and carries an `@author Hector Espert`
   javadoc tag. Copy the header from a neighbouring file when adding one.
+- **Javadoc is enforced.** The javadoc plugin runs with `doclint` set to `all` and
+  `failOnWarnings`, so a missing `@param`, a broken `{@link}` or an undocumented public member
+  fails the build. Every package also has a `package-info.java`. Run `./mvnw clean javadoc:javadoc`
+  after touching comments — without `clean` the plugin skips regeneration and reports nothing.
+- The site pages live in `src/site/markdown` and its menus in `src/site/site.xml` (Doxia 2 format,
+  root element `<site>`, banner and menu names are attributes). Links to hosts already used by the
+  project `<url>` get relativised by Doxia, so check generated hrefs after adding one.
 - 4-space indent, no wildcard imports, fields `private final` and constructor-injected.
 - Dependency bumps arrive as monthly Dependabot PRs; that is the normal shape of commits on `master`.

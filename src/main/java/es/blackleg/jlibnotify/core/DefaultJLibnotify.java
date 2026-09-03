@@ -25,6 +25,14 @@ import es.blackleg.jlibnotify.jna.NativeLibnotify;
 import es.blackleg.jlibnotify.JLibnotifyNotification;
 
 /**
+ * Reference implementation of {@link JLibnotify} on top of the JNA binding.
+ *
+ * <p>Delegates every call to {@link NativeLibnotify}, converting the {@link GBoolean} results of
+ * the native functions into Java types or into exceptions. Reading the server capabilities is
+ * delegated to a {@link ServerCapabilitiesReader}, the only part that walks native memory.</p>
+ *
+ * <p>Instances are built by {@link DefaultJLibnotifyLoader#load()} once the native library is
+ * loaded; application code should depend on the {@link JLibnotify} interface instead.</p>
  *
  * @author Hector Espert
  */
@@ -34,6 +42,13 @@ public class DefaultJLibnotify implements JLibnotify {
 
     private final ServerCapabilitiesReader serverCapabilitiesReader;
 
+    /**
+     * Creates a binding over an already loaded native library.
+     *
+     * @param libnotify                the loaded native library
+     * @param serverCapabilitiesReader reader used to walk the capabilities returned by the
+     *                                 notification server
+     */
     public DefaultJLibnotify(NativeLibnotify libnotify, ServerCapabilitiesReader serverCapabilitiesReader) {
         this.nativeLibnotify = libnotify;
         this.serverCapabilitiesReader = serverCapabilitiesReader;

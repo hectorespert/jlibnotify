@@ -21,6 +21,15 @@ import es.blackleg.jlibnotify.jna.GBoolean;
 import es.blackleg.jlibnotify.jna.NativeLibnotify;
 
 /**
+ * Reference implementation of {@link JLibnotifyNotification}.
+ *
+ * <p>Holds the raw {@link Pointer} that {@code notify_notification_new} returned for this
+ * notification and passes it to every native call. The pointer belongs to the libnotify session
+ * that created it, so the notification must not be used after {@link DefaultJLibnotify#unInit()}.</p>
+ *
+ * <p>Instances are built by
+ * {@link DefaultJLibnotify#createNotification(String, String, String)}; application code should
+ * depend on the {@link JLibnotifyNotification} interface instead.</p>
  *
  * @author Hector Espert
  */
@@ -30,6 +39,12 @@ public class DefaultJLibnotifyNotification implements JLibnotifyNotification {
     
     private final NativeLibnotify nativeLibnotify;
     
+    /**
+     * Creates a notification over an existing native notification structure.
+     *
+     * @param pointer         pointer returned by {@code notify_notification_new}
+     * @param nativeLibnotify the loaded native library the pointer belongs to
+     */
     public DefaultJLibnotifyNotification(Pointer pointer, NativeLibnotify nativeLibnotify) {
         this.pointer = pointer;
         this.nativeLibnotify = nativeLibnotify;

@@ -16,10 +16,26 @@
 package es.blackleg.jlibnotify.jna;
 
 /**
+ * Java mapping of the C {@code gboolean} type used by libnotify.
+ *
+ * <p>JNA converts it by ordinal through an {@code EnumConverter} registered in the type mapper of
+ * the loader, so {@link #FALSE} maps to {@code 0} and {@link #TRUE} to any other value.
+ * <strong>The declaration order is therefore part of the binding and must not be changed.</strong></p>
+ *
+ * <p>Implementation detail of the native binding: the public API exposes Java {@code boolean}
+ * instead.</p>
  *
  * @author Hector Espert
  */
 public enum GBoolean {
+
+    /**
+     * The C value {@code FALSE}, mapped by JNA to the ordinal {@code 0}.
+     */
     FALSE,
+
+    /**
+     * The C value {@code TRUE}, mapped by JNA to the ordinal {@code 1}.
+     */
     TRUE
 }
