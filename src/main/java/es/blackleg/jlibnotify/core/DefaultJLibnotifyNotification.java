@@ -64,7 +64,7 @@ public class DefaultJLibnotifyNotification implements JLibnotifyNotification {
 
     @Override
     public void update(String summary, String body, String icon) {
-        if ( nativeLibnotify.notify_notification_update(pointer, summary, body, icon) == GBoolean.FALSE) {
+        if (nativeLibnotify.notify_notification_update(pointer, summary, body, icon) == GBoolean.FALSE) {
             throw new RuntimeException("Error when showing notification");
         }
     }

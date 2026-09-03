@@ -88,7 +88,7 @@ public class JLibnotifyIT {
         notification.show();
         notification.setTimeOut(6000);
         Thread.sleep(1000);
-        notification.update("LibNotify IT override","LibNotify Integration test override", "dialog-information");
+        notification.update("LibNotify IT override", "LibNotify Integration test override", "dialog-information");
         notification.show();
         Thread.sleep(1000);
         notification.close();

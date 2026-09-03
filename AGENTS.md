@@ -120,12 +120,13 @@ bump a version by editing `<version>`** — the tag name is the version.
   report. Most of them read what the build left in `target`, so `site` has to run in a workspace
   where `verify` already ran — that is what CI does. A bare `mvnw site` on a clean checkout
   silently omits the test and coverage reports and fails on japicmp, which needs the built jar.
-- **The Checkstyle ruleset in `checkstyle.xml` encodes the conventions of this file**, not a general
-  purpose style: the licence header, the `@author` tag, the four space indentation and the absence
-  of wildcard imports, plus a few correctness checks. Keep it that way — a violation should always
-  mean a real departure from the project style. It covers the test sources too, reports at severity
-  `warning` and does not fail the build; the tree is at zero violations, so anything the report
-  shows is new.
+- **Checkstyle runs the `sun_checks.xml` bundled with Checkstyle**, tuned by
+  `checkstyle-suppressions.xml`, which the ruleset picks up by name. Everything suppressed there is
+  a decision the project already took, not a backlog, so the entries are meant to stay and anything
+  the report shows is something to fix. The tree is at zero violations, test sources included.
+  Note what `sun_checks` does *not* check: it carries no `Indentation` module, its header check is
+  commented out and its `JavadocType` does not require an author, so the four space indentation, the
+  Apache header and the `@author` tag stay conventions of this file rather than enforced rules.
 - **japicmp compares the built jar against the latest release** resolved from the repository (the
   `RELEASE` meta-version), so it reports what a consumer upgrading from the published version would
   see. It only produces the HTML report; its XML, diff and markdown outputs are switched off so they
