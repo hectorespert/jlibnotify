@@ -169,6 +169,31 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.30.0</version>
+                <configuration>
+                    <!-- The *IT classes need a real libnotify, and PIT refuses to run
+                         against a suite that is not green, so mutate against the unit
+                         tests only. That keeps the goal working off Linux too. -->
+                    <targetTests>
+                        <targetTest>es.blackleg.jlibnotify.*Test</targetTest>
+                    </targetTests>
+                    <!-- Every mutation on a line the tests do reach has to die. The
+                         lines no test reaches at all are JaCoCo's job, so no
+                         mutationThreshold here. -->
+                    <testStrengthThreshold>100</testStrengthThreshold>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>mutation-coverage</id>
+                        <goals>
+                            <goal>mutationCoverage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>3.4.0</version>
@@ -383,6 +408,18 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.13</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.30.0</version>
                 <reportSets>
                     <reportSet>
                         <reports>
