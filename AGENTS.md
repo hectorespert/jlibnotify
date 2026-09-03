@@ -115,10 +115,16 @@ bump a version by editing `<version>`** — the tag name is the version.
   `failOnWarnings`, so a missing `@param`, a broken `{@link}` or an undocumented public member
   fails the build. Every package also has a `package-info.java`. Run `./mvnw clean javadoc:javadoc`
   after touching comments — without `clean` the plugin skips regeneration and reports nothing.
-- The site reports come from the `<reporting>` section: Javadoc, the Surefire/Failsafe test results
-  and the JaCoCo coverage. They read what the build left in `target`, so `site` has to run in a
-  workspace where `verify` already ran — that is what CI does. A bare `mvnw site` on a clean
-  checkout silently omits the test and coverage reports.
+- The site reports come from the `<reporting>` section: Javadoc, the cross-referenced sources
+  (JXR), the Surefire/Failsafe test results, the JaCoCo coverage and the japicmp API compatibility
+  report. Most of them read what the build left in `target`, so `site` has to run in a workspace
+  where `verify` already ran — that is what CI does. A bare `mvnw site` on a clean checkout
+  silently omits the test and coverage reports and fails on japicmp, which needs the built jar.
+- **japicmp compares the built jar against the latest release** resolved from the repository (the
+  `RELEASE` meta-version), so it reports what a consumer upgrading from the published version would
+  see. It only produces the HTML report; its XML, diff and markdown outputs are switched off so they
+  do not end up published alongside the site. It does not fail the build yet — turning on
+  `breakBuildOnBinaryIncompatibleModifications` would make the frozen public API enforceable.
 - The site pages live in `src/site/markdown` and its menus in `src/site/site.xml` (Doxia 2 format,
   root element `<site>`, banner and menu names are attributes). Links to hosts already used by the
   project `<url>` get relativised by Doxia, so check generated hrefs after adding one.
