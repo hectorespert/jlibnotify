@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2019 Hector Espert.
  *
@@ -32,35 +31,35 @@ import org.junit.Test;
  * @author Hector Espert
  */
 public class JLibnotifyIT {
-    
+
     private JLibnotify libNotify;
-    
+
     @Before
     public void setUp() throws JLibnotifyLoadException, JLibnotifyInitException {
         if (Objects.isNull(libNotify)) {
             libNotify = DefaultJLibnotifyLoader.init().load();
         }
-        
+
         assertThat(libNotify.isInitted()).isFalse();
         libNotify.init("LibNotifyIT");
         assertThat(libNotify.isInitted()).isTrue();
     }
-    
+
     @After
     public void tearDown() {
         assertThat(libNotify.isInitted()).isTrue();
         libNotify.unInit();
         assertThat(libNotify.isInitted()).isFalse();
     }
-    
-    
+
+
     @Test
     public void testAppName() {
         assertThat(libNotify.getAppName()).isEqualTo("LibNotifyIT");
         libNotify.setAppName("LibNotifyTest");
         assertThat(libNotify.getAppName()).isEqualTo("LibNotifyTest");
     }
-    
+
     @Test
     @Ignore
     public void testServerInfo() {
@@ -71,7 +70,7 @@ public class JLibnotifyIT {
         assertThat(serverInfo).extracting(ServerInfo::getVersion).isNotNull();
         assertThat(serverInfo).extracting(ServerInfo::getSpecVersion).isNotNull();
     }
-    
+
     @Test
     @Ignore
     public void testServerCapabilities() {
@@ -85,7 +84,7 @@ public class JLibnotifyIT {
     public void testNotification() throws InterruptedException {
         JLibnotifyNotification notification = libNotify.createNotification("LibNotify IT", "LibNotify Integration test", "dialog-information");
         assertThat(notification).isNotNull();
-        
+
         notification.show();
         notification.setTimeOut(6000);
         Thread.sleep(1000);

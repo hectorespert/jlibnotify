@@ -56,5 +56,5 @@ public class DefaultServerCapabilitiesReader implements ServerCapabilitiesReader
         }
         return serverCapabilities;
     }
-    
+
 }

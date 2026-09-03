@@ -27,7 +27,7 @@ public class NativeLibNotifyMock implements NativeLibnotify {
 
     private String appName;
     private int timeout;
-    
+
     private boolean initted = false;
 
     @Override
@@ -97,5 +97,5 @@ public class NativeLibNotifyMock implements NativeLibnotify {
     public Pointer notify_get_server_caps() {
         return Pointer.NULL;
     }
-    
+
 }

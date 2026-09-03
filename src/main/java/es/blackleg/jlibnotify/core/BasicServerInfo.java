@@ -28,11 +28,11 @@ import es.blackleg.jlibnotify.ServerInfo;
 public class BasicServerInfo implements ServerInfo {
 
     private final String name;
-    
+
     private final String vendor;
-    
+
     private final String version;
-    
+
     private final String specVersion;
 
     /**

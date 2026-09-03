@@ -31,7 +31,7 @@ import java.util.Collection;
  * @author Hector Espert
  */
 public interface ServerCapabilitiesReader {
-    
+
     /**
      * Reads the capability strings of a native {@code GList}.
      *
@@ -40,5 +40,5 @@ public interface ServerCapabilitiesReader {
      * @return the capabilities held by the list, empty if the list holds none
      */
     Collection<String> getServerCapabilitiesFromPointer(Pointer pointer);
-    
+
 }

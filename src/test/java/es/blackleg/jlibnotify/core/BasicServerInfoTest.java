@@ -26,7 +26,7 @@ import org.junit.Test;
 public class BasicServerInfoTest {
 
     private BasicServerInfo basicServerInfo;
-    
+
     @Before
     public void setUp() {
         basicServerInfo = new BasicServerInfo("name", "vendor", "version", "specVersion");
@@ -36,5 +36,5 @@ public class BasicServerInfoTest {
     public void testToString() {
         assertThat(basicServerInfo.toString()).isNotEmpty();
     }
-    
+
 }
