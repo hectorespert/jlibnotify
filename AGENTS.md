@@ -121,8 +121,8 @@ bump a version by editing `<version>`** — the tag name is the version.
   where `verify` already ran — that is what CI does. A bare `mvnw site` on a clean checkout
   silently omits the test and coverage reports and fails on japicmp, which needs the built jar.
 - **The Checkstyle ruleset in `checkstyle.xml` encodes the conventions of this file**, not a general
-  purpose style: the licence header, the `@author` tag, the four space indentation and the absence
-  of wildcard imports, plus a few correctness checks. Keep it that way — a violation should always
+  purpose style: the licence header, the `@author` tag, the four space indentation, the absence
+  of wildcard imports and three spacing rules, plus a few correctness checks. Keep it that way — a violation should always
   mean a real departure from the project style. It covers the test sources too, reports at severity
   `warning` and does not fail the build; the tree is at zero violations, so anything the report
   shows is new.

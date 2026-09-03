@@ -53,6 +53,14 @@
         </module>
         <module name="LeftCurly"/>
         <module name="NeedBraces"/>
+
+        <!-- Spacing. Only the three rules that caught real sloppiness in this
+             code: a paren followed by a space, an operator without a space
+             before it, and a comma without one after it. -->
+        <module name="ParenPad"/>
+        <module name="WhitespaceAfter"/>
+        <module name="WhitespaceAround"/>
+
         <module name="ModifierOrder"/>
         <module name="UpperEll"/>
 
