@@ -146,7 +146,12 @@ bump a version by editing `<version>`** — the tag name is the version.
   mean a real departure from the project style. It covers the test sources too, reports at severity
   `warning` and does not fail the build; the tree is at zero violations, so anything the report
   shows is new.
-- **CycloneDX writes an SBOM** at `package`, so `verify` and `deploy` both produce it. It is not a
+- **CycloneDX writes an SBOM** at `package`, so `verify` and `deploy` both produce it. It needs
+  `skipNotDeployed` set to `false`: that parameter defaults to `true`, and the release profile hands
+  deployment to `central-publishing-maven-plugin`, which disables the standard deploy plugin — so
+  CycloneDX read the release build as a module that is not deployed and skipped itself, logging
+  `Skipping CycloneDX goal, because module skips deploy`. 1.3.2 went to Maven Central without an
+  SBOM because of it. Reproduce with `-Dmaven.deploy.skip=true`. It is not a
   site report: it attaches `-cyclonedx.xml` and `-cyclonedx.json` as artifacts, which the release
   deploys to Maven Central next to the jar, the sources and the javadoc, signed by the same GPG key.
   It records that the two JNA dependencies are dual licensed, LGPL-2.1-or-later and Apache-2.0, so a
