@@ -31,6 +31,9 @@ jobs:
     
     - name: Checkout
       uses: actions/checkout@v7
+      with:
+        # The whole history, so the japicmp baseline below can see the earlier tags.
+        fetch-depth: 0
 
     - name: Set up JDK 21
       uses: actions/setup-java@v6.0.0
@@ -51,8 +54,19 @@ jobs:
         OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
         MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
     
+    # deploy has just installed this version, so japicmp's default RELEASE baseline
+    # would resolve to it and the report would compare the jar against itself. Pin the
+    # baseline to the newest release tag below this one instead.
+    - name: Resolve the japicmp baseline
+      run: |
+        BASELINE=$( { git tag --list | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$'; echo "$GITHUB_REF_NAME"; } \
+          | sort -V -u | grep -B1 -Fx "$GITHUB_REF_NAME" | head -1 )
+        [ "$BASELINE" = "$GITHUB_REF_NAME" ] && BASELINE=RELEASE
+        echo "Comparing $GITHUB_REF_NAME against $BASELINE"
+        echo "JAPICMP_BASELINE=$BASELINE" >> "$GITHUB_ENV"
+
     - name: Site generation
-      run: ./mvnw -B site -P release -Drevision=$GITHUB_REF_NAME -Dchangelist=
+      run: ./mvnw -B site -P release -Drevision=$GITHUB_REF_NAME -Dchangelist= -Djapicmp.baseline=$JAPICMP_BASELINE
 
     - name: Setup Pages
       uses: actions/configure-pages@v6

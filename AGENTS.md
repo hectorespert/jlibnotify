@@ -140,6 +140,8 @@ bump a version by editing `<version>`** — the tag name is the version.
   japicmp API compatibility report. Most of them read what the build left in `target`, so `site` has to run in a workspace
   where `verify` already ran — that is what CI does. A bare `mvnw site` on a clean checkout
   silently omits the test and coverage reports and fails on japicmp, which needs the built jar.
+  `-DskipPitest` and `site` in the same command fail the same way: PIT's report mojo aborts the
+  whole site when `target/pit-reports` is missing, rather than skipping itself.
 - **The Checkstyle ruleset in `checkstyle.xml` encodes the conventions of this file**, not a general
   purpose style: the licence header, the `@author` tag, the four space indentation, the absence
   of wildcard imports and three spacing rules, plus a few correctness checks. Keep it that way — a violation should always
@@ -168,9 +170,14 @@ bump a version by editing `<version>`** — the tag name is the version.
   `inputInclude` brought it back; and its configuration lives in `<reporting>`, so running
   `rat:check` from the command line ignores it and reports a different set of files than the site
   does. Prose and IDE files are excluded; the XML the project owns carries the header.
-- **japicmp compares the built jar against the latest release** resolved from the repository (the
-  `RELEASE` meta-version), so it reports what a consumer upgrading from the published version would
-  see. It only produces the HTML report; its XML, diff and markdown outputs are switched off so they
+- **japicmp compares the built jar against the latest release**, so it reports what a consumer
+  upgrading from the published version would see. The baseline is the `japicmp.baseline` property,
+  `RELEASE` by default — the newest version in the repository, which is the right answer for local
+  and PR builds. It is *not* the right answer during a release: `deploy` installs the version being
+  released before `site` runs, so `RELEASE` resolves to it and the report compares the jar against
+  itself, which is what the 1.3.2 site shipped. `publish.yml` therefore resolves the newest release
+  tag below the one being built and passes it explicitly. A version range like `(,1.3.2)` does not
+  work here — japicmp resolves the artifact directly, without range resolution. It only produces the HTML report; its XML, diff and markdown outputs are switched off so they
   do not end up published alongside the site. It does not fail the build yet — turning on
   `breakBuildOnBinaryIncompatibleModifications` would make the frozen public API enforceable.
 - The site pages live in `src/site/markdown` and its menus in `src/site/site.xml` (Doxia 2 format,
