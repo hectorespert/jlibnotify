@@ -18,6 +18,12 @@
         <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
         <jacoco-maven-plugin.version>0.8.13</jacoco-maven-plugin.version>
         <pitest-maven.version>1.30.0</pitest-maven.version>
+        <!-- What japicmp compares this build against. RELEASE, the newest version in
+             the repository, is right everywhere except the release build itself: there
+             `deploy` has already installed the version being released, so RELEASE would
+             resolve to it and the report would compare the jar against itself. The
+             release workflow overrides this with the exclusive range `(,<version>)`. -->
+        <japicmp.baseline>RELEASE</japicmp.baseline>
     </properties>
     <name>JLibnotify</name>
     <description>Java libnotify wrapper</description>
@@ -372,7 +378,7 @@
                         <dependency>
                             <groupId>${project.groupId}</groupId>
                             <artifactId>${project.artifactId}</artifactId>
-                            <version>RELEASE</version>
+                            <version>${japicmp.baseline}</version>
                             <type>jar</type>
                         </dependency>
                     </oldVersion>
